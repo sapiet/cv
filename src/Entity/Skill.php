@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SocialRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SkillRepository")
  */
-class Social
+class Skill
 {
     /**
      * @ORM\Id()
@@ -19,20 +19,15 @@ class Social
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $className;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $title;
+    private $percentage;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $link;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Profile", inversedBy="socials")
+     * @ORM\ManyToOne(targetEntity="Profile", inversedBy="skills")
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
      */
     private $profile;
@@ -42,38 +37,26 @@ class Social
         return $this->id;
     }
 
-    public function getClassName(): ?string
+    public function getName(): ?string
     {
-        return $this->className;
+        return $this->name;
     }
 
-    public function setClassName(string $className): self
+    public function setName(string $name): self
     {
-        $this->className = $className;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getPercentage(): ?int
     {
-        return $this->title;
+        return $this->percentage;
     }
 
-    public function setTitle(string $title): self
+    public function setPercentage(int $percentage): self
     {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getLink(): ?string
-    {
-        return $this->link;
-    }
-
-    public function setLink(string $link): self
-    {
-        $this->link = $link;
+        $this->percentage = $percentage;
 
         return $this;
     }

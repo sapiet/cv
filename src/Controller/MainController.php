@@ -12,6 +12,6 @@ class MainController extends Controller
 		$email = $this->getParameter('email');
 		$profile = $profileRepository->findOneByEmail($email);
 
-		return $this->render('index.html.twig', compact('profile', 'title'));
+		return $this->render('index.html.twig', compact('profile'));
 	}
 }

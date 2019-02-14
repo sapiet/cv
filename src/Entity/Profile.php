@@ -77,9 +77,27 @@ class Profile
      */
     private $socials;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Experience", mappedBy="profile")
+     */
+    private $experiences;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Formation", mappedBy="profile")
+     */
+    private $formations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Skill", mappedBy="profile")
+     */
+    private $skills;
+
     public function __construct()
     {
         $this->socials = new ArrayCollection();
+        $this->experiences = new ArrayCollection();
+        $this->formations = new ArrayCollection();
+        $this->skills = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,5 +259,65 @@ class Profile
     public function getFullname(): ?string
     {
         return $this->firstname.' '.$this->lastname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExperiences()
+    {
+        return $this->experiences;
+    }
+
+    /**
+     * @param mixed $experiences
+     *
+     * @return self
+     */
+    public function setExperiences($experiences)
+    {
+        $this->experiences = $experiences;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFormations()
+    {
+        return $this->formations;
+    }
+
+    /**
+     * @param mixed $formations
+     *
+     * @return self
+     */
+    public function setFormations($formations)
+    {
+        $this->formations = $formations;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * @param mixed $skills
+     *
+     * @return self
+     */
+    public function setSkills($skills)
+    {
+        $this->skills = $skills;
+
+        return $this;
     }
 }
