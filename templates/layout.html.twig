@@ -8,6 +8,10 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="{{ profile.getFullname() }}" />
+	<meta property="og:description" content="{{ profile.getShortDescription()|striptags }}" />
+	<meta property="og:image" content="{{ asset('assets/images/background.jpg') }}" />
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/default.css') }}">
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/layout.css') }}">
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/media-queries.css') }}">
