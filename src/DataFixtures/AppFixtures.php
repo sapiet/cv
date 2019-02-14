@@ -9,6 +9,7 @@ use App\Entity\Social;
 use App\Entity\Experience;
 use App\Entity\Formation;
 use App\Entity\Skill;
+use App\Entity\Work;
 use App\DataFixtures\Data;
 use DateTimeImmutable;
 
@@ -80,6 +81,17 @@ class AppFixtures extends Fixture
             ;
 
             $manager->persist($skillEntity);
+        }
+
+        foreach (Data::PROFILE['works'] as $work) {
+            $workEntity = (new Work())
+                ->setTitle($work['title'])
+                ->setDescription($work['description'])
+                ->setCover($work['cover'])
+                ->setProfile($profile)
+            ;
+
+            $manager->persist($workEntity);
         }
 
         $manager->persist($profile);

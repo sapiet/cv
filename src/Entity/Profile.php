@@ -92,12 +92,18 @@ class Profile
      */
     private $skills;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Work", mappedBy="profile")
+     */
+    private $works;
+
     public function __construct()
     {
         $this->socials = new ArrayCollection();
         $this->experiences = new ArrayCollection();
         $this->formations = new ArrayCollection();
         $this->skills = new ArrayCollection();
+        $this->works = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -317,6 +323,26 @@ class Profile
     public function setSkills($skills)
     {
         $this->skills = $skills;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorks()
+    {
+        return $this->works;
+    }
+
+    /**
+     * @param mixed $works
+     *
+     * @return self
+     */
+    public function setWorks($works)
+    {
+        $this->works = $works;
 
         return $this;
     }
