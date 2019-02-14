@@ -14,4 +14,12 @@ class MainController extends Controller
 
 		return $this->render('index.html.twig', compact('profile'));
 	}
+
+    public function curriculumVitae(ProfileRepository $profileRepository)
+    {
+        $email = $this->getParameter('email');
+        $profile = $profileRepository->findOneByEmail($email);
+
+        return $this->render('curriculum-vitae.html.twig', compact('profile'));
+    }
 }

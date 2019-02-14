@@ -1,3 +1,7 @@
 index:
   path: /
   controller: App\Controller\MainController::index
+
+cv:
+  path: /curriculum-vitae
+  controller: App\Controller\MainController::curriculumVitae
