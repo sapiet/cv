@@ -32,6 +32,16 @@ class Work
     private $cover;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $link;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Profile", inversedBy="works")
      * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
      */
@@ -81,6 +91,46 @@ class Work
     /**
      * @return mixed
      */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param mixed $link
+     *
+     * @return self
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     *
+     * @return self
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getProfile()
     {
         return $this->profile;
@@ -96,5 +146,12 @@ class Work
         $this->profile = $profile;
 
         return $this;
+    }
+
+    // Custom functions
+
+    public function getCoverPath()
+    {
+        return 'assets/images/work/'.$this->getCover();
     }
 }

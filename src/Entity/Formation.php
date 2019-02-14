@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Helper\DateHelper;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FormationRepository")
@@ -35,6 +36,11 @@ class Formation
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $endDate;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
 
     /**
      * @ORM\Column(type="text")
@@ -100,6 +106,26 @@ class Formation
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     *
+     * @return self
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -130,5 +156,12 @@ class Formation
         $this->profile = $profile;
 
         return $this;
+    }
+
+    // Custom functions
+
+    public function getDuration()
+    {
+        return DateHelper::getDuration($this->startDate, $this->endDate);
     }
 }

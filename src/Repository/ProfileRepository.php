@@ -6,12 +6,6 @@ use App\Entity\Profile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-/**
- * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
- * @method Profile|null findOneBy(array $criteria, array $orderBy = null)
- * @method Profile[]    findAll()
- * @method Profile[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class ProfileRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
@@ -19,32 +13,33 @@ class ProfileRepository extends ServiceEntityRepository
         parent::__construct($registry, Profile::class);
     }
 
-    // /**
-    //  * @return Profile[] Returns an array of Profile objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getByEmail(string $email): ?Profile
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $dql = '
+            SELECT
+                profile,
+                socials,
+                experiences,
+                formations,
+                skills,
+                works
+            FROM App:Profile profile
+            INNER JOIN profile.socials socials
+            INNER JOIN profile.experiences experiences
+            INNER JOIN profile.formations formations
+            INNER JOIN profile.skills skills
+            INNER JOIN profile.works works
+            WHERE profile.email = :email
+            ORDER BY
+                experiences.startDate DESC,
+                formations.startDate DESC,
+                works.position ASC,
+                skills.percentage DESC
+        ';
 
-    /*
-    public function findOneBySomeField($value): ?Profile
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $this->getEntityManager()->createQuery($dql);
+        $query->setParameters(compact('email'));
+
+        return $query->getOneOrNullResult();
     }
-    */
 }

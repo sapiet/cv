@@ -17,12 +17,98 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $this->loadProfile($manager);
+        $profile = $this->loadProfile($manager);
+
+        $this->loadSocial($manager, $profile);
+        $this->loadFormations($manager, $profile);
+        $this->loadExperiences($manager, $profile);
+        $this->loadSkills($manager, $profile);
+        $this->loadWorks($manager, $profile);
+
+        $manager->persist($profile);
+        $manager->flush();
+    }
+
+    public function loadSocial(ObjectManager $manager, Profile $profile)
+    {
+        foreach (Data::PROFILE['social'] as $social) {
+            $socialEntity = (new Social())
+                ->setClassName($social['className'])
+                ->setTitle($social['title'])
+                ->setLink($social['link'])
+                ->setProfile($profile)
+            ;
+
+            $manager->persist($socialEntity);
+        }
+    }
+
+    public function loadFormations(ObjectManager $manager, Profile $profile)
+    {
+        foreach (Data::PROFILE['formations'] as $formation) {
+            $formationEntity = (new Formation())
+                ->setPlace($formation['place'])
+                ->setDegree($formation['degree'])
+                ->setStartDate(new DateTimeImmutable($formation['startDate']))
+                ->setEndDate($formation['endDate'] ? new DateTimeImmutable($formation['endDate']) : null)
+                ->setCity($formation['city'])
+                ->setDescription($formation['description'])
+                ->setProfile($profile)
+            ;
+
+            $manager->persist($formationEntity);
+        }
+    }
+
+    public function loadExperiences(ObjectManager $manager, Profile $profile)
+    {
+        foreach (Data::PROFILE['experiences'] as $experience) {
+            $experienceEntity = (new Experience())
+                ->setCompany($experience['company'])
+                ->setJobName($experience['jobName'])
+                ->setStartDate(new DateTimeImmutable($experience['startDate']))
+                ->setEndDate($experience['endDate'] ? new DateTimeImmutable($experience['endDate']) : null)
+                ->setCity($experience['city'])
+                ->setDescription($experience['description'])
+                ->setProfile($profile)
+            ;
+
+            $manager->persist($experienceEntity);
+        }
+    }
+
+    public function loadSkills(ObjectManager $manager, Profile $profile)
+    {
+        foreach (Data::PROFILE['skills'] as $skill) {
+            $skillEntity = (new Skill())
+                ->setName($skill['name'])
+                ->setPercentage($skill['percentage'])
+                ->setProfile($profile)
+            ;
+
+            $manager->persist($skillEntity);
+        }
+    }
+
+    public function loadWorks(ObjectManager $manager, Profile $profile)
+    {
+        foreach (Data::PROFILE['works'] as $index => $work) {
+            $workEntity = (new Work())
+                ->setTitle($work['title'])
+                ->setDescription($work['description'])
+                ->setCover($work['cover'])
+                ->setLink(array_key_exists('link', $work) ? $work['link'] : null)
+                ->setPosition($index + 1)
+                ->setProfile($profile)
+            ;
+
+            $manager->persist($workEntity);
+        }
     }
 
     public function loadProfile(ObjectManager $manager)
     {
-    	$profile = (new Profile())
+    	return (new Profile())
     		->setFirstname(Data::PROFILE['firstname'])
 			->setLastname(Data::PROFILE['lastname'])
 			->setEmail(Data::PROFILE['email'])
@@ -35,66 +121,5 @@ class AppFixtures extends Fixture
             ->setShortDescription(Data::PROFILE['shortDescription'])
             ->setLongDescription(Data::PROFILE['longDescription'])
 		;
-
-        foreach (Data::PROFILE['social'] as $social) {
-            $socialEntity = (new Social())
-                ->setClassName($social['className'])
-                ->setTitle($social['title'])
-                ->setLink($social['link'])
-                ->setProfile($profile)
-            ;
-
-            $manager->persist($socialEntity);
-        }
-
-        foreach (Data::PROFILE['formations'] as $formation) {
-            $formationEntity = (new Formation())
-                ->setPlace($formation['place'])
-                ->setDegree($formation['degree'])
-                ->setStartDate(new DateTimeImmutable($formation['startDate']))
-                ->setEndDate($formation['endDate'] ? new DateTimeImmutable($formation['endDate']) : null)
-                ->setDescription($formation['description'])
-                ->setProfile($profile)
-            ;
-
-            $manager->persist($formationEntity);
-        }
-
-        foreach (Data::PROFILE['experiences'] as $experience) {
-            $experienceEntity = (new Experience())
-                ->setCompany($experience['company'])
-                ->setJobName($experience['jobName'])
-                ->setStartDate(new DateTimeImmutable($experience['startDate']))
-                ->setEndDate($experience['endDate'] ? new DateTimeImmutable($experience['endDate']) : null)
-                ->setDescription($experience['description'])
-                ->setProfile($profile)
-            ;
-
-            $manager->persist($experienceEntity);
-        }
-
-        foreach (Data::PROFILE['skills'] as $skill) {
-            $skillEntity = (new Skill())
-                ->setName($skill['name'])
-                ->setPercentage($skill['percentage'])
-                ->setProfile($profile)
-            ;
-
-            $manager->persist($skillEntity);
-        }
-
-        foreach (Data::PROFILE['works'] as $work) {
-            $workEntity = (new Work())
-                ->setTitle($work['title'])
-                ->setDescription($work['description'])
-                ->setCover($work['cover'])
-                ->setProfile($profile)
-            ;
-
-            $manager->persist($workEntity);
-        }
-
-        $manager->persist($profile);
-        $manager->flush();
     }
 }

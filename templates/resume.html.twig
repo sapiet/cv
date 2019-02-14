@@ -8,17 +8,24 @@
             {% for experience in profile.getExperiences() %}
                 <div class="row item">
                     <div class="twelve columns">
-                        <h3>{{ experience.getCompany() }}</h3>
+                        <h3>
+                            {{ experience.getCompany() }}
+                        </h3>
+
                         <p class="info">
-                            {{ experience.getJobName() }}
+                            {{ experience.getJobName() }},
+                            {{ experience.getCity() }}
                             <span>&bull;</span>
                             <em class="date">
-                                Depuis {{ experience.getStartDate()|date('d/m/Y') }}
+                                {{ experience.getDuration() }}
                             </em>
                         </p>
-                        <p>
-                            {{ experience.getDescription() }}
-                        </p>
+
+                        {% if experience.getDescription() %}
+                            <p>
+                                {{ experience.getDescription()|raw }}
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
@@ -33,17 +40,24 @@
             {% for formation in profile.getFormations() %}
                 <div class="row item">
                     <div class="twelve columns">
-                        <h3>{{ formation.getPlace() }}</h3>
-                        <p class="info">
+                        <h3>
                             {{ formation.getDegree() }}
+                        </h3>
+
+                        <p class="info">
+                            {{ formation.getPlace() }},
+                            {{ formation.getCity() }}
                             <span>&bull;</span>
                             <em class="date">
-                                Depuis {{ formation.getStartDate()|date('d/m/Y') }}
+                                {{ formation.getDuration() }}
                             </em>
                         </p>
-                        <p>
-                            {{ formation.getDescription() }}
-                        </p>
+
+                        {% if formation.getDescription() %}
+                            <p>
+                                {{ formation.getDescription() }}
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
@@ -56,11 +70,7 @@
         </div>
 
         <div class="nine columns main-col">
-            <p>
-                Que foutre içi ?
-            </p>
-
-			<div class="bars">
+            <div class="bars">
                 <ul class="skills">
                     {% for skill in profile.getSkills() %}
                         <li>

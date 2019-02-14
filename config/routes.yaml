@@ -5,3 +5,7 @@ index:
 cv:
   path: /curriculum-vitae
   controller: App\Controller\MainController::curriculumVitae
+
+contact:
+  path: /contact
+  controller: App\Controller\MainController::contact
