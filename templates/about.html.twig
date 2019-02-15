@@ -8,7 +8,7 @@
             <h2>À propos</h2>
 
             <p>
-                {{ profile.getLongDescription() }}
+                {{ profile.getLongDescription()|raw }}
             </p>
 
             <div class="row">
@@ -36,7 +36,7 @@
                     <p>
                         <a href="{{ path('cv') }}" class="button">
                             <i class="fa fa-download"></i>
-                            Télécharger mon curriculum vitae
+                            Téléchargez mon curriculum vitae
                         </a>
                     </p>
                 </div>

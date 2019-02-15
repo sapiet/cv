@@ -3,16 +3,30 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\FormInterface;
 use App\Repository\ProfileRepository;
+use App\Helper\FormHelper;
+use App\Form\ContactModel;
+use App\Form\ContactType;
+use App\Entity\Profile;
 
 class MainController extends Controller
 {
-	public function index(ProfileRepository $profileRepository)
+    private function getContactForm(): FormInterface
+    {
+        return $this->createForm(ContactType::class, new ContactModel(), [
+            'action' => $this->generateUrl('contact'),
+            'method' => 'POST'
+        ]);
+    }
+
+    public function index(ProfileRepository $profileRepository)
 	{
 		$profile = $profileRepository->getByEmail($this->getParameter('email'));
+        $form = $this->getContactForm();
+        $form = $form->createView();
 
-		return $this->render('index.html.twig', compact('profile'));
+		return $this->render('index.html.twig', compact('profile', 'form'));
 	}
 
     public function curriculumVitae(ProfileRepository $profileRepository)
@@ -26,19 +40,27 @@ class MainController extends Controller
     {
 		$profile = $profileRepository->getByEmail($this->getParameter('email'));
 
-    	$name = $request->request->get('name');
-    	$email = $request->request->get('email');
-    	$subject = $request->request->get('subject');
-    	$message = $request->request->get('message');
+        $form = $this->getContactForm();
+        $form->handleRequest($request);
 
-    	$message = (new \Swift_Message($subject))
-	        ->setFrom($email, $name)
-	        ->setTo($profile->getEmail(), $profile->getFullname())
-	        ->setBody($message)
-	    ;
+        if ($request->isMethod('POST')) {
+            if ($form->isValid()) {
+                $contact = $form->getData();
 
-	    $mailer->send($message);
+            	$message = (new \Swift_Message($contact->getSubject()))
+        	        ->setFrom($contact->getEmail(), $contact->getEmail())
+        	        ->setTo($profile->getEmail(), $profile->getFullname())
+        	        ->setBody($contact->getMessage())
+        	    ;
 
-    	return new JsonResponse(['error' => null]);
+        	    $mailer->send($message);
+
+                return $this->json(['success' => true]);
+            } else {
+               return $this->json(FormHelper::getErrors($form)); 
+            }
+        }
+
+    	throw $this->createNotFoundException();
     }
 }

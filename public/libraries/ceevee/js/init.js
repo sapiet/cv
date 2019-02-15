@@ -141,25 +141,43 @@
         event.preventDefault();
 
         $('#image-loader').fadeIn();
+        cleanErrors($(this).attr('name'));
 
         var ajaxParameters = {
             url: $(this).attr('action'),
             data: $(this).serialize(),
             method: $(this).attr('method'),
             success: function(response) {
-                if (!response.error) {
+                if (response.success) {
                     $('#image-loader').fadeOut();
-                    $('#message-warning').hide();
+                    //$('#message-warning').hide();
                     $('#contactForm').fadeOut();
                     $('#message-success').fadeIn();   
                 } else {
                     $('#image-loader').fadeOut();
-                    $('#message-warning').html(response.error);
-                    $('#message-warning').fadeIn();
+                    displayErrors(response);
+                    //$('#message-warning').html(response.error);
+                    //$('#message-warning').fadeIn();
                 }
             }
         };
 
         $.ajax(ajaxParameters);
     });
+
+    var cleanErrors = function(name)
+    {
+        $('form[name="' + name + '"]').find('.form-error').remove();
+    }
+
+    var displayErrors = function(response)
+    {
+        var form = $('form[name="' + response.name + '"]');
+
+        for (var name in response.errors) {
+            var errors = response.errors[name];
+            $('[name="' + name + '"]')
+                .after('<div class="form-error">' + errors.join(' ') + '</div>')
+        }
+    }
 });
