@@ -1,0 +1,21 @@
+{
+	"javascriptsGroups" : {
+    	"public/assets/js/main.js" : [
+    		"assets/js/main.js"
+        ]
+	},
+	"stylesheetsGroups" : [
+		{
+			"parent" : "assets/scss/main.scss",
+			"destination" : "public/assets/css/main.css",
+			"files" : [
+				"assets/scss/main.scss"
+			]
+		}
+	],
+	"options" : {
+		"minifyCss" : {
+			"advanced": true
+		}
+	}
+}
