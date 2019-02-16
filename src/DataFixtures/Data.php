@@ -14,7 +14,7 @@ class Data
 		'mobile' => '07 81 25 65 74',
 		'website' => 'https://xavierquievre.fr',
 		'profession' => 'Développeur web',
-		'shortDescription' => 'Développeur <span>Web</span>, <span>Mobile</span> et <span>Application</span><br><a class="smoothscroll" href="#about">Scrollez</a> pour en savoir plus <a class="smoothscroll" href="#about">sur moi</a>.',
+		'shortDescription' => 'Développeur <span>Web</span>, <span>Mobile</span> et <span>Application</span>.<br> <a class="smoothscroll" href="#about">Scrollez</a> pour en savoir plus <a class="smoothscroll" href="#about">sur moi</a>.',
 		'longDescription' => '<p>J\'ai découvert la programmation en 2012 et celle-ci est très vite devenue une passion, après avoir été formé à différents langages web et logiciels, j\'ai approfondi mes connaissances dans le développement web.</p><p>Vous avez des questions où une envie de réaliser un projet ?<br><a class="smoothscroll" href="#contact">Envoyez moi un message !</a></p>',
         'social' => [
         	[

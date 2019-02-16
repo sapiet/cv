@@ -11,7 +11,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="{{ profile.getFullname() }}" />
 	<meta property="og:description" content="{{ profile.getShortDescription()|striptags }}" />
-	<meta property="og:image" content="{{ asset('assets/images/background.jpg') }}" />
+	<meta property="og:image" content="{{ absolute_url('assets/images/profile.jpg') }}" />
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/default.css') }}">
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/layout.css') }}">
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/media-queries.css') }}">
@@ -24,13 +24,5 @@
 	{% block body %}{% endblock %}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="{{ asset('assets/js/main.min.js') }}"></script>
-	{#<script src="{{ asset('libraries/ceevee/js/modernizr.js') }}"></script>
-	<script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-	<script type="text/javascript" src="{{ asset('libraries/ceevee/js/jquery-migrate-1.2.1.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('libraries/ceevee/js/jquery.flexslider.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('libraries/ceevee/js/waypoints.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('libraries/ceevee/js/jquery.fittext.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('libraries/ceevee/js/magnific-popup.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('libraries/ceevee/js/init.js') }}"></script>#}
 </body>
 </html>
