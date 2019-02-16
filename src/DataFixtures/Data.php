@@ -30,14 +30,14 @@ class Data
                 'startDate' => '2016-01-01',
                 'endDate' => null,
                 'city' => 'Marcq-en-baroeul',
-                'description' => 'Développement de l\'application mobile <a href="https://www.youpicity.com" target="_blank">Youpicity</a>',
+                'description' => 'Développement de l\'application mobile <a href="https://www.youpicity.com" target="_blank">Youpicity</a> sous Ionic et Symfony4',
             ], [
                 'company' => 'WebdealAuto',
                 'jobName' => 'Développeur web',
                 'startDate' => '2014-04-18',
                 'endDate' => null,
                 'city' => 'Villeneuve d\'Ascq',
-                'description' => 'Y\'en a des choses à dire ...',
+                'description' => 'Développement du site mobile sous Symfony2, développement d\'outils marketing sous Symfony1, intégration de la refonte graphique du site marchand (bootstrap / gulp / scss / jQuery), développement du nouveau logiciel d\'expédition avec Angular6 et une API Symfony3, développement d\'un WMS avec Angular et intégration dans Cordova, refonte technique du backend avec Symfony3, MongoDB, ElasticSearch, RabbitMQ',
             ], [
                 'company' => 'Réflexe Adoption',
                 'jobName' => 'Développeur web',

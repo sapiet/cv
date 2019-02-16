@@ -25,9 +25,12 @@ ul#nav li.current a {
 		.form-error {
 			position: absolute;
 			bottom: -30px;
-			//height: 42px;
 			margin-left: 26%;
 			color: #D72828;
 		}
 	}
+}
+
+#nav-wrap > a {
+	background-color: #767F94;
 }
