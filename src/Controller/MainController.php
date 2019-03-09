@@ -17,6 +17,13 @@ use Swift_Message;
 
 class MainController extends AbstractController
 {
+    private $profileRepository;
+
+    public function __construct(ProfileRepository $profileRepository)
+    {
+        $this->profileRepository = $profileRepository;
+    }
+
     /**
      * Create contact form
      * 
@@ -31,15 +38,32 @@ class MainController extends AbstractController
     }
 
     /**
-     * Display home page
+     * Retrieve the profile
+     *
+     * @throws NotFoundHttpException If the profile does not exist
      * 
-     * @param  ProfileRepository $profileRepository Profile repository
+     * @return Profile The retrieved profile
+     */
+    private function getProfile(): Profile
+    {
+        $email = $this->getParameter('email');
+
+        try {
+            return $this->profileRepository->getByEmail($email);
+        } catch (Exception $exception) {
+            throw $this->createNotFoundException('Unable to retrieve profile with email "'.$email.'"');
+        }
+    }
+
+    /**
+     * Display home page
      * 
      * @return Response                             Response
      */
-    public function index(ProfileRepository $profileRepository): Response
+    public function index(): Response
 	{
-		$profile = $profileRepository->getByEmail($this->getParameter('email'));
+        $profile = $this->getProfile();
+
         $form = $this->getContactForm();
         $form = $form->createView();
 
@@ -49,13 +73,11 @@ class MainController extends AbstractController
     /**
      * Display CV
      * 
-     * @param  ProfileRepository $profileRepository Profile repository
-     * 
      * @return Response Response
      */
-    public function curriculumVitae(ProfileRepository $profileRepository): Response
+    public function curriculumVitae(): Response
     {
-		$profile = $profileRepository->getByEmail($this->getParameter('email'));
+        $profile = $this->getProfile();
 
         $view = $this->renderView('curriculum-vitae.html.twig', compact('profile'));
 
@@ -70,14 +92,13 @@ class MainController extends AbstractController
      * Handle contact form submit
      * 
      * @param  Request           $request           Request
-     * @param  ProfileRepository $profileRepository Profile repository
      * @param  Swift_Mailer      $mailer            Mailer
      *
      * @return Response                             Response
      */
-    public function contact(Request $request, ProfileRepository $profileRepository, Swift_Mailer $mailer): Response
+    public function contact(Request $request, Swift_Mailer $mailer): Response
     {
-		$profile = $profileRepository->findOneByEmail($this->getParameter('email'));
+        $profile = $this->getProfile();
 
         $form = $this->getContactForm();
         $form->handleRequest($request);

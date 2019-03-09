@@ -18,9 +18,9 @@ class ProfileRepository extends ServiceEntityRepository
      * 
      * @param  string $email Profile email
      * 
-     * @return ?Profile Retrieved profile or null
+     * @return Profile Retrieved profile
      */
-    public function getByEmail(string $email): ?Profile
+    public function getByEmail(string $email): Profile
     {
         $dql = '
             SELECT
@@ -47,6 +47,6 @@ class ProfileRepository extends ServiceEntityRepository
         $query = $this->getEntityManager()->createQuery($dql);
         $query->setParameters(compact('email'));
 
-        return $query->getOneOrNullResult();
+        return $query->getSingleResult();
     }
 }
