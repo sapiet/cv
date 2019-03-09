@@ -34,6 +34,27 @@
 
     <div class="row work">
         <div class="three columns header-col">
+            <h1><span>Compétences</span></h1>
+        </div>
+
+        <div class="nine columns main-col">
+            <div class="bars">
+                <ul class="skills">
+                    {% for skill in profile.getSkills() %}
+                        <li>
+                            <span class="bar-expand" style="width:{{ skill.getPercentage() }}%"></span>
+                            <em>
+                                {{ skill.getName() }}
+                            </em>
+                        </li>
+                    {% endfor %}
+				</ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row skill">
+        <div class="three columns header-col">
             <h1><span>Formation</span></h1>
         </div>
         <div class="nine columns main-col">
@@ -61,27 +82,6 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
-    </div>
-
-    <div class="row skill">
-        <div class="three columns header-col">
-            <h1><span>Compétences</span></h1>
-        </div>
-
-        <div class="nine columns main-col">
-            <div class="bars">
-                <ul class="skills">
-                    {% for skill in profile.getSkills() %}
-                        <li>
-                            <span class="bar-expand" style="width:{{ skill.getPercentage() }}%"></span>
-                            <em>
-                                {{ skill.getName() }}
-                            </em>
-                        </li>
-                    {% endfor %}
-				</ul>
-            </div>
         </div>
     </div>
 </section>

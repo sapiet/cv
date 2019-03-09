@@ -108,34 +108,6 @@ table {
 
 	<div class="border"></div>
 
-	<table class="structure skills">
-		<tr>
-			<td class="left text-dark">
-				Compétences
-			</td>
-			<td class="right">
-				<table>
-					{% for skill in profile.getSkills() %}
-						<tr>
-							<td class="text-darker">
-								{{ skill.getName() }}
-							</td>
-							<td class="stars">
-								{% for rate in 1..10 %}
-									<span class="star-{{ skill.getPercentage() / 10 >= rate ?  'on' : 'off' }}">
-										&bull;
-									</span>
-								{% endfor %}
-							</td>
-						</tr>
-					{% endfor %}
-				</table>
-			</td>
-		</tr>
-	</table>
-
-	<div class="border"></div>
-
 	<table class="structure">
 		<tr>
 			<td class="left text-dark">
@@ -163,6 +135,34 @@ table {
 						</tr>
 					</table>
 				{% endfor %}
+			</td>
+		</tr>
+	</table>
+
+	<div class="border"></div>
+
+	<table class="structure skills">
+		<tr>
+			<td class="left text-dark">
+				Compétences
+			</td>
+			<td class="right">
+				<table>
+					{% for skill in profile.getSkills() %}
+						<tr>
+							<td class="text-darker">
+								{{ skill.getName() }}
+							</td>
+							<td class="stars">
+								{% for rate in 1..10 %}
+									<span class="star-{{ skill.getPercentage() / 10 >= rate ?  'on' : 'off' }}">
+										&bull;
+									</span>
+								{% endfor %}
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
 			</td>
 		</tr>
 	</table>
