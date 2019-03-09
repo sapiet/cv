@@ -15,7 +15,7 @@ class Data
 		'website' => 'https://xavierquievre.fr',
 		'profession' => 'Développeur web',
 		'shortDescription' => 'Développeur <span>Web</span>, <span>Mobile</span> et <span>Application</span>.<br> <a class="smoothscroll" href="#about">Scrollez</a> pour en savoir plus <a class="smoothscroll" href="#about">sur moi</a>.',
-		'longDescription' => '<p>J\'ai découvert la programmation en 2012 et celle-ci est très vite devenue une passion, après avoir été formé à différents langages web et logiciels, j\'ai approfondi mes connaissances dans le développement web.</p><p>Vous avez des questions où une envie de réaliser un projet ?<br><a class="smoothscroll" href="#contact">Envoyez moi un message !</a></p>',
+		'longDescription' => '<p>J\'ai découvert la programmation en 2012 et celle-ci est très vite devenue une passion, après avoir été formé à différents langages web et logiciels, j\'ai approfondi mes connaissances dans le développement web.</p><p>Vous avez des questions ou une envie de réaliser un projet ?<br><a class="smoothscroll" href="#contact">Envoyez moi un message !</a></p>',
         'social' => [
         	[
         		'className' => 'fab fa-github',
@@ -107,15 +107,14 @@ class Data
             ]
         ],
         'skills' => [
-            ['name' => 'HTML5', 'percentage' => 70],
-            ['name' => 'CSS3', 'percentage' => 70],
-            ['name' => 'PHP7', 'percentage' => 70],
+            ['name' => 'PHP7', 'percentage' => 75],
             ['name' => 'Symfony 1/2/3/4', 'percentage' => 70],
+            ['name' => 'HTML5 / CSS3 / SCSS', 'percentage' => 65],
             ['name' => 'jQuery', 'percentage' => 70],
-            ['name' => 'NodeJS', 'percentage' => 60],
-            ['name' => 'Angular 2+', 'percentage' => 60],
-            ['name' => 'Ionic', 'percentage' => 60],
-            ['name' => 'MySQL', 'percentage' => 60],
+            ['name' => 'NodeJS', 'percentage' => 50],
+            ['name' => 'Angular 2+ / Ionic', 'percentage' => 60],
+            ['name' => 'MySQL', 'percentage' => 65],
+            ['name' => 'Docker', 'percentage' => 50],
             ['name' => 'MongoDB', 'percentage' => 50],
             ['name' => 'ElasticSearch', 'percentage' => 50],
         ],
