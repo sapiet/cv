@@ -13,6 +13,13 @@ class ProfileRepository extends ServiceEntityRepository
         parent::__construct($registry, Profile::class);
     }
 
+    /**
+     * Retrieve a profile from email
+     * 
+     * @param  string $email Profile email
+     * 
+     * @return ?Profile Retrieved profile or null
+     */
     public function getByEmail(string $email): ?Profile
     {
         $dql = '
