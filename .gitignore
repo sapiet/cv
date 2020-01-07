@@ -1,3 +1,5 @@
+.idea
+gulp/gulp.conf.local.json
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -16,5 +18,3 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
-
-gulp/gulp.conf.local.json
