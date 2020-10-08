@@ -32,6 +32,7 @@
                         {{ form_widget(form.message) }}
                     </div>
                     <div>
+                        <input type="hidden" name="recaptcha_key" id="recaptcha-key">
                         <button type="submit" class="submit">Envoyer</button>
                         <span id="image-loader">
                             <img alt="" src="{{ asset('libraries/ceevee/images/loader.gif') }}">

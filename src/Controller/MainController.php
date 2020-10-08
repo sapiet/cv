@@ -104,6 +104,8 @@ class MainController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+            // https://developers.google.com/recaptcha/docs/verify
+            dd($request->request->get('recaptcha-key'));
             if ($form->isValid()) {
                 $contact = $form->getData();
 

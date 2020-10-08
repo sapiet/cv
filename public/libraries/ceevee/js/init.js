@@ -140,29 +140,37 @@
     $('form#contactForm').submit(function(event) {
         event.preventDefault();
 
+        var form = $(this);
+
         $('#image-loader').fadeIn();
-        cleanErrors($(this).attr('name'));
+        cleanErrors(form.attr('name'));
 
-        var ajaxParameters = {
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            method: $(this).attr('method'),
-            success: function(response) {
-                if (response.success) {
-                    $('#image-loader').fadeOut();
-                    //$('#message-warning').hide();
-                    $('#contactForm').fadeOut();
-                    $('#message-success').fadeIn();   
-                } else {
-                    $('#image-loader').fadeOut();
-                    displayErrors(response);
-                    //$('#message-warning').html(response.error);
-                    //$('#message-warning').fadeIn();
-                }
-            }
-        };
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6Le1atUUAAAAANqs2YmfaRqi9XZWqjP_yMWakcys', {action: 'contact'}).then(function(token) {
+                $('#recaptcha-key').val(token);
 
-        $.ajax(ajaxParameters);
+                var ajaxParameters = {
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    method: form.attr('method'),
+                    success: function(response) {
+                        if (response.success) {
+                            $('#image-loader').fadeOut();
+                            //$('#message-warning').hide();
+                            $('#contactForm').fadeOut();
+                            $('#message-success').fadeIn();
+                        } else {
+                            $('#image-loader').fadeOut();
+                            displayErrors(response);
+                            //$('#message-warning').html(response.error);
+                            //$('#message-warning').fadeIn();
+                        }
+                    }
+                };
+
+                $.ajax(ajaxParameters);
+            });
+        });
     });
 
     var cleanErrors = function(name)
