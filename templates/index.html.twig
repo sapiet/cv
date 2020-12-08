@@ -5,6 +5,8 @@
 	{% include 'about.html.twig' %}
 	{% include 'resume.html.twig' %}
 	{% include 'portfolio.html.twig' %}
-	{% include 'contact.html.twig' %}
+	{% if form is defined %}
+		{% include 'contact.html.twig' %}
+	{% endif %}
 	{% include 'footer.html.twig' %}
 {% endblock %}

@@ -26,7 +26,7 @@ class MainController extends AbstractController
 
     /**
      * Create contact form
-     * 
+     *
      * @return FormInterface Contact form
      */
     private function getContactForm(): FormInterface
@@ -41,7 +41,7 @@ class MainController extends AbstractController
      * Retrieve the profile
      *
      * @throws NotFoundHttpException If the profile does not exist
-     * 
+     *
      * @return Profile The retrieved profile
      */
     private function getProfile(): Profile
@@ -57,22 +57,27 @@ class MainController extends AbstractController
 
     /**
      * Display home page
-     * 
-     * @return Response                             Response
+     *
+     * @return Response Response
      */
-    public function index(): Response
+    public function index(bool $withContactForm = false): Response
 	{
         $profile = $this->getProfile();
+        $templateVars = compact('profile');
 
-        $form = $this->getContactForm();
-        $form = $form->createView();
+        if (true === $withContactForm) {
+            $form = $this->getContactForm();
+            $form = $form->createView();
 
-		return $this->render('index.html.twig', compact('profile', 'form'));
+            $templateVars['form'] = $form;
+        }
+
+		return $this->render('index.html.twig', $templateVars);
 	}
 
     /**
      * Display CV
-     * 
+     *
      * @return Response Response
      */
     public function curriculumVitae(): Response
@@ -88,9 +93,20 @@ class MainController extends AbstractController
         return new Response();
     }
 
+    public function curriculumVitaeContent()
+    {
+        $profile = $this->getProfile();
+
+        $view = $this->renderView('curriculum-vitae.html.twig', compact('profile'));
+
+        $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML($view);
+        return $html2pdf->output(null, 'S');
+    }
+
     /**
      * Handle contact form submit
-     * 
+     *
      * @param  Request           $request           Request
      * @param  Swift_Mailer      $mailer            Mailer
      *
@@ -117,7 +133,7 @@ class MainController extends AbstractController
 
                 return $this->json(['success' => true]);
             } else {
-               return $this->json(FormHelper::getErrors($form)); 
+               return $this->json(FormHelper::getErrors($form));
             }
         }
 

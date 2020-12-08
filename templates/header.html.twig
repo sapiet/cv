@@ -24,11 +24,13 @@
                     Portfolio
                 </a>
             </li>
-            <li>
-                <a class="smoothscroll" href="#contact">
-                    Contact
-                </a>
-            </li>
+            {% if form is defined %}
+                <li>
+                    <a class="smoothscroll" href="#contact">
+                        Contact
+                    </a>
+                </li>
+            {% endif %}
             <li>
                 <a href="{{ path('cv') }}" target="_blank">
                     curriculum vitae
