@@ -15,7 +15,7 @@ class Data
 		'website' => 'https://xavierquievre.fr',
 		'profession' => 'Développeur web',
 		'shortDescription' => 'Développeur <span>Web</span>, <span>Mobile</span> et <span>Application</span>.<br> <a class="smoothscroll" href="#about">Scrollez</a> pour en savoir plus <a class="smoothscroll" href="#about">sur moi</a>.',
-		'longDescription' => '<p>J\'ai découvert la programmation en 2012 et celle-ci est très vite devenue une passion, après avoir été formé à différents langages web et logiciels, j\'ai approfondi mes connaissances dans le développement web.</p><p>Vous avez des questions ou une envie de réaliser un projet ?<br><a class="smoothscroll" href="#contact">Envoyez moi un message !</a></p>',
+		'longDescription' => '<p>J\'ai découvert la programmation en 2012 et celle-ci est très vite devenue une passion, après avoir été formé à différents langages web et logiciels, j\'ai approfondi mes connaissances dans le développement web.</p>',
         'social' => [
         	[
         		'className' => 'fab fa-github',
@@ -25,12 +25,26 @@ class Data
         ],
         'experiences' => [
             [
+                'company' => 'Ci-Oniya',
+                'jobName' => 'Developer',
+                'startDate' => '2020-12-01',
+                'endDate' => null,
+                'city' => 'Marcq-en-baroeul',
+                'description' => 'Mise en place de la boutique <a href="https://ci-oniya.com/" target="_blank">Ci-Oniya</a> avec Prestashop / Création d\'un outils d\'optimisation des découpes de pièces en javascript',
+            ], [
+                'company' => 'Synapse Interactive',
+                'jobName' => 'Lead Developer',
+                'startDate' => '2019-08-19',
+                'endDate' => null,
+                'city' => 'Marcq-en-baroeul',
+                'description' => 'Conception d\'un outils de création de newsletter avec Symfony 4 et VueJS / Migration de deux sites sous Symfony 5 / Maintenance des outils existants sous Symfony et CodeIgniter',
+            ], [
                 'company' => 'Webgump',
                 'jobName' => 'Lead Développeur',
                 'startDate' => '2016-01-01',
                 'endDate' => null,
                 'city' => 'Marcq-en-baroeul',
-                'description' => 'Développement de l\'application mobile <a href="https://www.youpicity.com" target="_blank">Youpicity</a> sous Ionic et Symfony4',
+                'description' => 'Développement de l\'application mobile <a href="https://www.youpicity.com" target="_blank">Youpicity</a> sous Ionic et Symfony4 / Refonte de l\'application mobile',
             ], [
                 'company' => 'WebdealAuto',
                 'jobName' => 'Développeur web',
@@ -104,6 +118,13 @@ class Data
                 'endDate' => null,
                 'city' => 'Roubaix',
                 'description' => '',
+            ], [
+                'place' => 'OpenClassrooms',
+                'degree' => 'Certification "Développez des applications Web avec Angular"',
+                'startDate' => '2019-10-16',
+                'endDate' => '2019-10-16',
+                'city' => null,
+                'description' => '',
             ]
         ],
         'skills' => [
@@ -113,6 +134,7 @@ class Data
             ['name' => 'jQuery', 'percentage' => 70],
             ['name' => 'NodeJS', 'percentage' => 50],
             ['name' => 'Angular 2+ / Ionic', 'percentage' => 60],
+            ['name' => 'VueJS', 'percentage' => 60],
             ['name' => 'MySQL', 'percentage' => 65],
             ['name' => 'Docker', 'percentage' => 50],
             ['name' => 'MongoDB', 'percentage' => 50],
@@ -120,9 +142,14 @@ class Data
         ],
         'works' => [
             [
+                'title'         =>  'Ci-Oniya',
+                'description'   =>  'Mise en place de la boutique en ligne et développement d\'un outils d\'optimisation des découpes',
+                'cover'       =>  'ci-oniya.png',
+                'link'           =>  'https://www.youpicity.com'
+            ], [
                 'title'         =>  'Youpicity',
-                'description'   =>  'Développement de l\'application Youpicity avec Ionic / Symfony',
-                'cover'       =>  'youpicity.jpg',
+                'description'   =>  'Développement de l\'application Youpicity v1 et v2 avec Ionic / Symfony',
+                'cover'       =>  'youpicity.png',
                 'link'           =>  'https://www.youpicity.com'
             ], [
                 'title'         =>  'WMS WebdealAuto',
