@@ -1,5 +1,6 @@
 .idea
 gulp/gulp.conf.local.json
+build/
 
 ###> symfony/framework-bundle ###
 /.env.local
