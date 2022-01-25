@@ -1,7 +1,7 @@
 <section id="resume">
     <div class="row education">
         <div class="three columns header-col">
-            <h1><span>Expérience</span></h1>
+            <h1><span>Expériences</span></h1>
         </div>
 
         <div class="nine columns main-col">
@@ -23,7 +23,7 @@
 
                         {% if experience.getDescription() %}
                             <p>
-                                {{ experience.getDescription()|raw }}
+                                {{ experience.getDescription() | raw | nl2br }}
                             </p>
                         {% endif %}
                     </div>
@@ -55,7 +55,7 @@
 
     <div class="row skill">
         <div class="three columns header-col">
-            <h1><span>Formation</span></h1>
+            <h1><span>Formations</span></h1>
         </div>
         <div class="nine columns main-col">
             {% for formation in profile.getFormations() %}
