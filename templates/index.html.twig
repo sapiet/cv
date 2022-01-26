@@ -1,10 +1,13 @@
 {% extends 'layout.html.twig' %}
 
+{% set profile = getProfile() %}
+
 {% block body %}
 	{% include 'header.html.twig' %}
 	{% include 'about.html.twig' %}
 	{% include 'resume.html.twig' %}
 	{% include 'portfolio.html.twig' %}
+	{% include 'recommendations.html.twig' %}
 	{% if form is defined %}
 		{% include 'contact.html.twig' %}
 	{% endif %}

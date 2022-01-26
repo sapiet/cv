@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -97,6 +98,11 @@ class Profile
      */
     private $works;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Recommendation", mappedBy="profile")
+     */
+    private $recommendations;
+
     public function __construct()
     {
         $this->socials = new ArrayCollection();
@@ -104,6 +110,7 @@ class Profile
         $this->formations = new ArrayCollection();
         $this->skills = new ArrayCollection();
         $this->works = new ArrayCollection();
+        $this->recommendations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -343,6 +350,71 @@ class Profile
     public function setWorks($works)
     {
         $this->works = $works;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPicturePath(): string
+    {
+        return 'assets/images/profile.jpg';
+    }
+
+    /**
+     * @return Skill[]
+     */
+    public function getHardSkills(): array
+    {
+        return $this->getSkillsByType(Skill::HARD);
+    }
+
+    /**
+     * @return Skill[]
+     */
+    public function getSoftSkills(): array
+    {
+        return $this->getSkillsByType(Skill::SOFT);
+    }
+
+    /**
+     * @return Skill[]
+     */
+    public function getSkillsByType(string $type): array
+    {
+        return array_filter($this->skills->toArray(), function(Skill $skill) use ($type): bool {
+            return $type === $skill->getType();
+        });
+    }
+
+    /**
+     * @return Collection|Recommendation[]
+     */
+    public function getRecommendations(): Collection
+    {
+        return $this->recommendations;
+    }
+
+    public function addRecommendation(Recommendation $recommendation): self
+    {
+        if (!$this->recommendations->contains($recommendation)) {
+            $this->recommendations[] = $recommendation;
+            $recommendation->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecommendation(Recommendation $recommendation): self
+    {
+        if ($this->recommendations->contains($recommendation)) {
+            $this->recommendations->removeElement($recommendation);
+            // set the owning side to null (unless already changed)
+            if ($recommendation->getProfile() === $this) {
+                $recommendation->setProfile(null);
+            }
+        }
 
         return $this;
     }

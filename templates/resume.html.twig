@@ -34,13 +34,13 @@
 
     <div class="row work">
         <div class="three columns header-col">
-            <h1><span>Compétences</span></h1>
+            <h1><span>Hard skills</span></h1>
         </div>
 
         <div class="nine columns main-col">
             <div class="bars">
                 <ul class="skills">
-                    {% for skill in profile.getSkills() %}
+                    {% for skill in profile.getHardSkills() %}
                         <li>
                             <span class="bar-expand" style="width:{{ skill.getPercentage() }}%"></span>
                             <em>
@@ -48,8 +48,26 @@
                             </em>
                         </li>
                     {% endfor %}
-				</ul>
+                </ul>
             </div>
+        </div>
+    </div>
+
+    <div class="row work">
+        <div class="three columns header-col">
+            <h1><span>Soft skills</span></h1>
+        </div>
+
+        <div class="nine columns main-col">
+            <ul class="skills">
+                {% for skill in profile.getSoftSkills() %}
+                    <li>
+                        <strong>
+                            {{ skill.getName() }}
+                        </strong>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
@@ -85,3 +103,4 @@
         </div>
     </div>
 </section>
+

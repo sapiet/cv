@@ -1,27 +1,30 @@
 <?php
+
 namespace App\Controller;
 
+use App\Services\ProfileProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\FormInterface;
 use Behat\Transliterator\Transliterator;
 use Spipu\Html2Pdf\Html2Pdf;
-use App\Repository\ProfileRepository;
 use App\Helper\FormHelper;
 use App\Form\ContactModel;
 use App\Form\ContactType;
-use App\Entity\Profile;
 use Swift_Mailer;
 use Swift_Message;
 
 class MainController extends AbstractController
 {
-    private $profileRepository;
+    /**
+     * @var ProfileProvider
+     */
+    private $profileProvider;
 
-    public function __construct(ProfileRepository $profileRepository)
+    public function __construct(ProfileProvider $profileProvider)
     {
-        $this->profileRepository = $profileRepository;
+        $this->profileProvider = $profileProvider;
     }
 
     /**
@@ -38,32 +41,13 @@ class MainController extends AbstractController
     }
 
     /**
-     * Retrieve the profile
-     *
-     * @throws NotFoundHttpException If the profile does not exist
-     *
-     * @return Profile The retrieved profile
-     */
-    private function getProfile(): Profile
-    {
-        $email = $this->getParameter('email');
-
-        try {
-            return $this->profileRepository->getByEmail($email);
-        } catch (Exception $exception) {
-            throw $this->createNotFoundException('Unable to retrieve profile with email "'.$email.'"');
-        }
-    }
-
-    /**
      * Display home page
      *
      * @return Response Response
      */
     public function index(bool $withContactForm = false): Response
 	{
-        $profile = $this->getProfile();
-        $templateVars = compact('profile');
+        $templateVars = [];
 
         if (true === $withContactForm) {
             $form = $this->getContactForm();
@@ -82,7 +66,7 @@ class MainController extends AbstractController
      */
     public function curriculumVitae(): Response
     {
-        $profile = $this->getProfile();
+        $profile = $this->profileProvider->get();
 
         $view = $this->renderView('curriculum-vitae.html.twig', compact('profile'));
 
@@ -95,7 +79,7 @@ class MainController extends AbstractController
 
     public function curriculumVitaeContent()
     {
-        $profile = $this->getProfile();
+        $profile = $this->profileProvider->get();
 
         $view = $this->renderView('curriculum-vitae.html.twig', compact('profile'));
 
@@ -114,7 +98,7 @@ class MainController extends AbstractController
      */
     public function contact(Request $request, Swift_Mailer $mailer): Response
     {
-        $profile = $this->getProfile();
+        $profile = $this->profileProvider->get();
 
         $form = $this->getContactForm();
         $form->handleRequest($request);

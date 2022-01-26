@@ -11,7 +11,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="{{ profile.getFullname() }}" />
 	<meta property="og:description" content="{{ profile.getShortDescription()|striptags }}" />
-	<meta property="og:image" content="{{ absolute_url('assets/images/profile.jpg') }}" />
+	<meta property="og:image" content="{{ absolute_url(profile.picturePath) }}" />
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/default.css') }}">
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/layout.css') }}">
 	<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/media-queries.css') }}">

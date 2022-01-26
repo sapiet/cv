@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Skill
 {
+    const HARD = 'hard';
+    const SOFT = 'soft';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -25,6 +28,12 @@ class Skill
      * @ORM\Column(type="integer")
      */
     private $percentage;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=false)
+     */
+    private $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="Profile", inversedBy="skills")
@@ -57,6 +66,25 @@ class Skill
     public function setPercentage(int $percentage): self
     {
         $this->percentage = $percentage;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return Skill
+     */
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
