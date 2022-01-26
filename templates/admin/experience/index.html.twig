@@ -1,0 +1,48 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <div class="text-right">
+                <a href="{{ path('experience_new') }}" class="btn btn-dark btn-sm">
+                    <i class="fa fa-plus"></i>
+                    Add
+                </a>
+            </div>
+
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>JobName</th>
+                        <th>Period</th>
+                        <th>City</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for experience in experiences %}
+                        <tr>
+                            <td>{{ experience.company }}</td>
+                            <td>{{ experience.jobName }}</td>
+                            <td>{{ experience.duration }}</td>
+                            <td>{{ experience.city }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{{ path('experience_show', {'id': experience.id}) }}" class="btn btn-dark btn-sm">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('experience_edit', {'id': experience.id}) }}" class="btn btn-dark btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

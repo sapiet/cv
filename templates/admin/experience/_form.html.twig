@@ -1,0 +1,13 @@
+<style>
+    textarea {
+        height: 300px !important;
+    }
+</style>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-dark btn-sm float-right">
+        <i class="{{ button_icon | default('far fa-save') }} mr-1"></i>
+        {{ button_label | default('Save') }}
+    </button>
+{{ form_end(form) }}

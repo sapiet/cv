@@ -1,0 +1,10 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block body %}
+    {{ include('admin/experience/_form.html.twig') }}
+
+    <a href="{{ path('experience_index') }}" class="btn btn-dark btn-sm">
+        <i class="fa fa-arrow-left mr-1"></i>
+        back to list
+    </a>
+{% endblock %}
