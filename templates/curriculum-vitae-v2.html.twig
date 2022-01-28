@@ -1,0 +1,255 @@
+<style type="text/css">
+*,
+.text-light {
+	color: #838C95;
+}
+.text-darker, h2 {
+	color: #313131;
+}
+.text-dark {
+	color: #6E7881;
+}
+table {
+	width: 100%;
+}
+.informations .left {
+	width: 70%;
+}
+.informations .name {
+	font-size: 22pt;
+	font-weight: bold;
+}
+.informations .profession {
+	font-size: 18pt;
+	font-style: italic;
+	margin-top: 5mm;
+	margin-left: 20mm;
+
+}
+.informations .right {
+	width: 30%;
+}
+.informations .right td {
+	padding-top: 0mm;
+}
+
+.half-size {
+	width: 50%;
+}
+
+.structure .structure-inner {
+	width: 100%;
+}
+.structure .sub-left {
+	width: 85%;
+}
+.structure .sub-right {
+	width: 15%;
+	text-align: right;
+	vertical-align: top;
+	font-size: 12px;
+}
+.structure .sub-left,
+.structure .sub-right {
+	padding-top: 6mm;
+}
+.description {
+	margin-top: 2mm;
+	font-size: 13px;
+}
+.border {
+	height: 1px;
+	margin-top: 6mm;
+	background: #dddddd;
+}
+.tag-container {
+	display: inline;
+	width: auto;
+	padding: 2mm;
+}
+.tag {
+	display: inline;
+	width: auto;
+	padding: 2mm 4mm;
+	background: #dddddd;
+	border-radius: 4mm;
+	color: #313131;
+}
+.stars {
+	padding-left: 10mm;
+	font-size: 20px;
+}
+.star-off {
+	color: #ccc;
+}
+.star-on {
+	color: #313131;
+}
+</style>
+<page style="font-size: 16px" backtop="5mm" backbottom="5mm" backleft="5mm" backright="5mm">
+	<table class="informations">
+		<tr>
+			<td class="left">
+				<span class="name text-darker">
+					{{ profile.getFullname() }}
+				</span>
+				<br>
+				<span class="profession text-dark">
+					{{ profile.getProfession() }}
+				</span>
+			</td>
+			<td class="right">
+				<table>
+					<tr>
+						<td>{{ profile.getAddress() }}</td>
+					</tr>
+					<tr>
+						<td>{{ profile.getZipcode() }} {{ profile.getCity() }}</td>
+					</tr>
+					<tr>
+						<td>{{ profile.getMobile() }}</td>
+					</tr>
+					<tr>
+						<td>{{ profile.getEmail() }}</td>
+					</tr>
+					<tr>
+						<td>{{ profile.getWebsite() }}</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<div class="border"></div>
+
+	<h2>Expériences</h2>
+	{% for experience in profile.getExperiences() %}
+		<table class="structure">
+			<tr>
+				<td class="structure-inner">
+					<table>
+						<tr>
+							<td class="sub-left text-darker">
+								{{ experience.getJobName() }}
+								<span class="text-light">chez</span>
+								{{ experience.getCompany() }}
+								{% if experience.getDescription() %}
+									<br>
+									<span class="description">{{ experience.getDescription() | raw | nl2br }}</span>
+								{% endif %}
+							</td>
+							<td class="sub-right text-dark" style="vertical-align: middle">
+								{{ experience.getDuration() }}
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	{% endfor %}
+
+	<div class="border"></div>
+
+	<h2>Hard skills</h2>
+	{% for label, skillsByCategory in profile.hardSkillsByCategories %}
+		<h3 class="text-dark">{{ label | upper }}</h3>
+		<table class="structure"{% if not loop.last %} style="margin-bottom: 4mm;"{% endif %}>
+			{% for skill in skillsByCategory.items %}
+				<tr>
+					<th class="half-size text-darker">
+						{{ skill.getName() }}
+					</th>
+					<th class="half-size">
+						{% set length = 8 %}
+						{% set percentage = skill.getPercentage() * length / 100 %}
+						{% for rate in 1..length %}
+							<span class="star-{{ percentage >= rate ?  'on' : 'off' }}">
+								&bull;
+							</span>
+						{% endfor %}
+					</th>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+
+	<div class="border"></div>
+
+	<h2>Soft skills</h2>
+	<table class="structure">
+		<tr>
+			<td class="structure-inner">
+				{% for skill in profile.getSoftSkills() %}
+					<div class="tag-container">
+						<div class="tag">
+							{{ skill.getName() }}
+						</div>
+					</div>
+				{% endfor %}
+			</td>
+		</tr>
+	</table>
+
+	<div class="border"></div>
+
+	<h2>Formations</h2>
+	<table class="structure">
+		<tr>
+			<td class="structure-inner">
+				{% for formation in profile.getFormations() %}
+					<table>
+						<tr>
+							<td class="sub-left text-darker">
+								{{ formation.getDegree() }}
+								<br>
+								<span class="text-dark">
+				    				{{ formation.getPlace() }}
+				    			</span>
+								{% if formation.getDescription() %}
+									<br>
+									<span class="description">
+								        {{ formation.getDescription() }}
+							        </span>
+								{% endif %}
+							</td>
+							<td class="sub-right text-dark">
+								{{ formation.getDuration() }}
+							</td>
+						</tr>
+					</table>
+				{% endfor %}
+			</td>
+		</tr>
+	</table>
+
+	<div class="border"></div>
+
+	<h2>Recommandations</h2>
+	<table class="structure">
+		<tr>
+			<td class="structure-inner">
+				{% for recommendation in profile.recommendations() %}
+					<table>
+						<tr>
+							<td style="width:100%;{% if not loop.last %} padding-bottom: 10mm{% endif %}">
+								<span class="text-darker" style="margin-top: 1mm; font-style: italic">
+									“ {{ recommendation.message }} ”
+								</span>
+								<br>
+								<div style="text-align: right; margin: 4mm 20mm 0 0;">
+									<strong class="text-darker">
+										{{ recommendation.firstname }}
+									</strong>
+									chez
+									<strong class="text-darker">
+										{{ recommendation.company }}
+									</strong>
+								</div>
+							</td>
+						</tr>
+					</table>
+				{% endfor %}
+			</td>
+		</tr>
+	</table>
+</page>

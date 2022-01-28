@@ -31,9 +31,15 @@ class Skill
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", length=4, nullable=false)
      */
     private $type;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity="Profile", inversedBy="skills")
@@ -85,6 +91,25 @@ class Skill
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategory(): string
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     * @return Skill
+     */
+    public function setCategory(string $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

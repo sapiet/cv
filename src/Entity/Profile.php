@@ -363,6 +363,36 @@ class Profile
     }
 
     /**
+     * @return array
+     */
+    public function getSplittedHardSkills(): array
+    {
+        $hardSkills = $this->getHardSkills();
+        return array_chunk($hardSkills, ceil(count($hardSkills) / 2));
+    }
+
+    /**
+     * @return array
+     */
+    public function getHardSkillsByCategories(): array
+    {
+        $list = [];
+
+        foreach ($this->getHardSkills() as $skill) {
+            if (false === array_key_exists($skill->getCategory(), $list)) {
+                $list[$skill->getCategory()] = [
+                    'category' => $skill->getCategory(),
+                    'items' => []
+                ];
+            }
+
+            $list[$skill->getCategory()]['items'][] = $skill;
+        }
+
+        return $list;
+    }
+
+    /**
      * @return Skill[]
      */
     public function getHardSkills(): array

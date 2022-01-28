@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\CvCreator;
 use App\Services\ProfileProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +23,17 @@ class MainController extends AbstractController
      */
     private $profileProvider;
 
-    public function __construct(ProfileProvider $profileProvider)
-    {
+    /**
+     * @var CvCreator
+     */
+    private $cvCreator;
+
+    public function __construct(
+        ProfileProvider $profileProvider,
+        CvCreator $cvCreator
+    ) {
         $this->profileProvider = $profileProvider;
+        $this->cvCreator = $cvCreator;
     }
 
     /**
@@ -63,28 +72,32 @@ class MainController extends AbstractController
      * Display CV
      *
      * @return Response Response
+     * @throws \Spipu\Html2Pdf\Exception\Html2PdfException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function curriculumVitae(): Response
     {
         $profile = $this->profileProvider->get();
-
-        $view = $this->renderView('curriculum-vitae.html.twig', compact('profile'));
-
-        $html2pdf = new Html2Pdf();
-        $html2pdf->writeHTML($view);
+        $html2pdf = $this->cvCreator->create();
         $html2pdf->output(Transliterator::urlize($profile->getFullname().'-curriculum-vitae').'.pdf');
 
         return new Response();
     }
 
+    /**
+     * @param CvCreator $creator
+     * @return string
+     * @throws \Spipu\Html2Pdf\Exception\Html2PdfException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function curriculumVitaeContent()
     {
-        $profile = $this->profileProvider->get();
+        $html2pdf = $this->cvCreator->create();
 
-        $view = $this->renderView('curriculum-vitae.html.twig', compact('profile'));
-
-        $html2pdf = new Html2Pdf();
-        $html2pdf->writeHTML($view);
         return $html2pdf->output(null, 'S');
     }
 
