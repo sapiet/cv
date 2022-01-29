@@ -1,24 +1,33 @@
-<section id="about">
+<section id="about" class="s-about target-section">
     <div class="row">
-        <div class="three columns">
-            <img class="profile-pic"  src="{{ asset(profile.picturePath) }}" alt="{{ profile.getFullname() }}" />
+        <div class="column large-3 tab-12">
+            <img class="s-about__pic" src="{{ asset(profile.picturePath) }}" alt="{{ profile.getFullname() }}">
         </div>
-
-        <div class="nine columns main-col">
-            <h2>À propos</h2>
+        <div class="column large-9 tab-12 s-about__content">
+            <h3>À propos</h3>
 
             <p>
-                {{ profile.getLongDescription()|raw }}
+                {{ profile.getLongDescription() | raw }}
             </p>
 
-            <div class="row">
-                <div class="columns download">
+            <hr>
+
+            <div class="row s-about__content-bottom">
+                <div class="column w-1000-stack">
+                    <h3>Contact</h3>
                     <p>
-                        <a href="{{ path('cv') }}" class="button">
-                            <i class="fa fa-download"></i>
-                            Téléchargez mon curriculum vitae
+                        Vous trouverez mes informations de contact dans l'en-tête de mon
+                        <a href="{{ path('cv') }}" target="_blank">
+                            curriculum vitae
                         </a>
                     </p>
+                </div>
+
+                <div class="column w-1000-stack">
+                    <a href="{{ path('cv') }}" target="_blank" class="btn btn--download">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill:rgba(0, 0, 0, 1);transform:;-ms-filter:"><path d="M12 16L16 11 13 11 13 4 11 4 11 11 8 11z"></path><path d="M20,18H4v-7H2v7c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2v-7h-2V18z"></path></svg>
+                        Téléchargez mon curriculum vitae
+                    </a>
                 </div>
             </div>
         </div>

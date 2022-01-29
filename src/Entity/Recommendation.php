@@ -38,6 +38,13 @@ class Recommendation
     private $company;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $message;
@@ -91,6 +98,25 @@ class Recommendation
     public function setCompany(string $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param string|null $picture
+     * @return Recommendation
+     */
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

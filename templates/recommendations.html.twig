@@ -1,36 +1,38 @@
-<!-- Testimonials Section
-   ================================================== -->
-<section id="testimonials">
-    <div class="text-container">
-        <div class="row">
-            <div class="two columns header-col">
-                <h1><span>Ils me font confiance</span></h1>
-            </div>
+<section id="testimonials" class="s-testimonials target-section">
+    <div class="s-testimonials__bg"></div>
 
-            <div class="ten columns flex-container">
-                <div class="flexslider">
-                    <ul class="slides">
-                        {% for recommendation in profile.recommendations() %}
-                        <li>
-                            <blockquote>
-                                <p>
-                                    {{ recommendation.message }}
-                                </p>
-                                <cite>
-                                    <strong>
-                                        {{ recommendation.firstname }}
-                                    </strong>
-                                    de
-                                    <strong>
-                                        {{ recommendation.company }}
-                                    </strong>
+    <div class="row s-testimonials__header">
+        <div class="column large-12">
+            <h3>Ils me font confiance</h3>
+        </div>
+    </div>
+
+    <div class="row s-testimonials__content">
+        <div class="column">
+            <div class="swiper-container testimonial-slider">
+                <div class="swiper-wrapper">
+                    {% for recommendation in profile.recommendations() %}
+                        <div class="testimonial-slider__slide swiper-slide">
+                            <div class="testimonial-slider__author">
+                                <img
+                                        src="{{ recommendation.picture }}"
+                                        alt="Author image"
+                                        class="testimonial-slider__avatar"
+                                >
+                                <cite class="testimonial-slider__cite">
+                                    <strong>{{ recommendation.firstname }}</strong>
+                                    <span>{{ recommendation.company }}</span>
                                 </cite>
-                            </blockquote>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div> <!-- div.flexslider ends -->
-            </div> <!-- div.flex-container ends -->
-        </div> <!-- row ends -->
-    </div>  <!-- text-container ends -->
-</section> <!-- Testimonials Section End-->
+                            </div>
+                            <p>
+                                {{ recommendation.message }}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+</section>

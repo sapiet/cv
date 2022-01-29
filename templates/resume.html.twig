@@ -1,106 +1,92 @@
-<section id="resume">
-    <div class="row education">
-        <div class="three columns header-col">
-            <h1><span>Expériences</span></h1>
+<section id="resume" class="s-resume target-section">
+    <div class="row s-resume__section">
+        <div class="column large-3 tab-12">
+            <h3 class="section-header-allcaps">Expériences</h3>
         </div>
-
-        <div class="nine columns main-col">
+        <div class="column large-9 tab-12">
             {% for experience in profile.getExperiences() %}
-                <div class="row item">
-                    <div class="twelve columns">
-                        <h3>
-                            {{ experience.getCompany() }}
-                        </h3>
-
-                        <p class="info">
-                            {{ experience.getJobName() }},
-                            {{ experience.getCity() }}
-                            <span>&bull;</span>
-                            <em class="date">
+                <div class="resume-block">
+                    <div class="resume-block__header">
+                        <h4 class="h3">{{ experience.getCompany() }}</h4>
+                        <p class="resume-block__header-meta">
+                            <span>{{ experience.getJobName() }}</span>
+                            <span class="resume-block__header-date">
                                 {{ experience.getDuration() }}
-                            </em>
+                            </span>
                         </p>
-
-                        {% if experience.getDescription() %}
-                            <p>
-                                {{ experience.getDescription() | raw | nl2br }}
-                            </p>
-                        {% endif %}
                     </div>
+
+                    {% if experience.getDescription() %}
+                        <p>
+                            {{ experience.getDescription() | raw | nl2br }}
+                        </p>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
     </div>
 
-    <div class="row work">
-        <div class="three columns header-col">
-            <h1><span>Hard skills</span></h1>
+    <div class="row s-resume__section">
+        <div class="column large-3 tab-12">
+            <h3 class="section-header-allcaps">Hard skills</h3>
         </div>
+        <div class="column large-9 tab-12">
+            {% for label, skillsByCategory in profile.hardSkillsByCategories %}
+                <div class="resume-block">
+                    <h4>
+                        {{ label | upper }}
+                    </h4>
 
-        <div class="nine columns main-col">
-            <div class="bars">
-                <ul class="skills">
-                    {% for skill in profile.getHardSkills() %}
-                        <li>
-                            <span class="bar-expand" style="width:{{ skill.getPercentage() }}%"></span>
-                            <em>
-                                {{ skill.getName() }}
-                            </em>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                    <ul class="skill-bars-fat">
+                        {% for skill in skillsByCategory.items %}
+                            <li>
+                                <div class="progress percent{{ skill.getPercentage() }}"></div>
+                                <strong>{{ skill.getName() }}</strong>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
-    <div class="row work">
-        <div class="three columns header-col">
-            <h1><span>Soft skills</span></h1>
+    <div class="row s-resume__section">
+        <div class="column large-3 tab-12">
+            <h3 class="section-header-allcaps">Soft skills</h3>
         </div>
-
-        <div class="nine columns main-col">
-            <ul class="skills">
-                {% for skill in profile.getSoftSkills() %}
-                    <li>
-                        <strong>
-                            {{ skill.getName() }}
-                        </strong>
-                    </li>
-                {% endfor %}
-            </ul>
+        <div class="column large-9 tab-12">
+            {% for skill in profile.getSoftSkills() %}
+                <span class="tag">
+                    {{ skill.getName() }}
+                </span>
+            {% endfor %}
         </div>
     </div>
 
-    <div class="row skill">
-        <div class="three columns header-col">
-            <h1><span>Formations</span></h1>
+    <div class="row s-resume__section">
+        <div class="column large-3 tab-12">
+            <h3 class="section-header-allcaps">Formations</h3>
         </div>
-        <div class="nine columns main-col">
+        <div class="column large-9 tab-12">
             {% for formation in profile.getFormations() %}
-                <div class="row item">
-                    <div class="twelve columns">
-                        <h3>
-                            {{ formation.getDegree() }}
-                        </h3>
-
-                        <p class="info">
-                            {{ formation.getPlace() }},
-                            {{ formation.getCity() }}
-                            <span>&bull;</span>
-                            <em class="date">
+                <div class="resume-block">
+                    <div class="resume-block__header">
+                        <h4 class="h3">{{ formation.getPlace() }}</h4>
+                        <p class="resume-block__header-meta">
+                            <span>{{ formation.getDegree() }}</span>
+                            <span class="resume-block__header-date">
                                 {{ formation.getDuration() }}
-                            </em>
+                            </span>
                         </p>
-
-                        {% if formation.getDescription() %}
-                            <p>
-                                {{ formation.getDescription() }}
-                            </p>
-                        {% endif %}
                     </div>
+
+                    {% if formation.getDescription() %}
+                        <p>
+                            {{ formation.getDescription() }}
+                        </p>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
     </div>
 </section>
-

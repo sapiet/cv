@@ -1,26 +1,26 @@
-<footer>
+<footer class="s-footer">
     <div class="row">
-        <div class="twelve columns">
-            <ul class="social-links">
+        <div class="column large-4 medium-6 w-1000-stack s-footer__social-block">
+            <ul class="s-footer__social">
                 {% for social in profile.getSocials() %}
                     <li>
                         <a href="{{ social.getLink() }}" title="{{ social.getTitle() }}" target="_blank">
-                            <i class="{{ social.getClassname() }}"></i>
+                            <i class="{{ social.getClassname() }}" aria-hidden="true"></i>
                         </a>
                     </li>
                 {% endfor %}
             </ul>
-
-            <ul class="copyright">
-                <li>&copy; Copyright 2014 CeeVee</li>
-                <li>Design by <a href="http://www.styleshout.com/" title="Styleshout" target="_blank">Styleshout</a></li>   
-            </ul>
         </div>
 
-        <div id="go-top">
-            <a class="smoothscroll" title="Revenir au début" href="#home">
-                <i class="icon-up-open"></i>
-            </a>
+        <div class="column large-7 medium-6 w-1000-stack ss-copyright">
+            <span>© Copyright Ceevee 2021</span>
+            <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
         </div>
+    </div>
+
+    <div class="ss-go-top">
+        <a class="smoothscroll" title="Revenir au début" href="#top">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 4h12v2H6zm5 10v6h2v-6h5l-6-6-6 6z"/></svg>
+        </a>
     </div>
 </footer>
