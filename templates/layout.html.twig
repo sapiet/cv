@@ -3,17 +3,19 @@
 	<head>
 		<meta charset="utf-8">
 		<title>{{ profile.getFullname() }}</title>
-		<meta name="description" content="{{ profile.getShortDescription()|striptags }}">
+		<meta name="description" content="{{ profile.getShortDescription() | striptags }}">
 		<meta name="author" content="{{ profile.getFullname() }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="{{ profile.getFullname() }}" />
-		<meta property="og:description" content="{{ profile.getShortDescription()|striptags }}" />
+		<meta property="og:description" content="{{ profile.getShortDescription() | striptags }}" />
 		<meta property="og:image" content="{{ absolute_url(profile.picturePath) }}" />
-		<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/styles.css') }}">
-		<link rel="stylesheet" href="{{ asset('libraries/ceevee/css/vendor.css') }}">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-		<link rel="stylesheet" href="{{ asset('assets/css/override.css') }}">
+		{% block stylesheets %}
+			{% for file in encore_entry_css_files('app') %}
+				<link href="{{ preload(asset(file), { 'as': 'style' }) }}" rel="stylesheet" type="text/css">
+			{% endfor %}
+		{% endblock %}
 	</head>
 	<body id="top" class="ss-preload">
 		<div id="preloader">
@@ -21,6 +23,10 @@
 		</div>
 		{% block body %}{% endblock %}
 		<script src="{{ asset('libraries/ceevee/js/plugins.js') }}"></script>
-		<script src="{{ asset('libraries/ceevee/js/main.js') }}"></script>
+		{% block javascripts %}
+			{% for file in encore_entry_js_files('app') %}
+				<script src="{{ preload(asset(file), { 'as': 'script' }) }}"></script>
+			{% endfor %}
+		{% endblock %}
 	</body>
 </html>

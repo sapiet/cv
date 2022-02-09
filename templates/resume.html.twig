@@ -73,7 +73,17 @@
                     <div class="resume-block__header">
                         <h4 class="h3">{{ formation.getPlace() }}</h4>
                         <p class="resume-block__header-meta">
-                            <span>{{ formation.getDegree() }}</span>
+                            {% if formation.document %}
+                                <a
+                                        href="{{ asset(formation.documentPath) }}"
+                                        target="_blank"
+                                        title="{{ formation.getDegree() }}"
+                                >
+                                    {{ formation.getDegree() }}
+                                </a>
+                            {% else %}
+                                <span>{{ formation.getDegree() }}</span>
+                            {% endif %}
                             <span class="resume-block__header-date">
                                 {{ formation.getDuration() }}
                             </span>

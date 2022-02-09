@@ -4,20 +4,26 @@ namespace App\Repository;
 
 use App\Entity\Profile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Profile|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Profile[]    findAll()
+ * @method Profile[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
 class ProfileRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Profile::class);
     }
 
     /**
      * Retrieve a profile from email
-     * 
+     *
      * @param  string $email Profile email
-     * 
+     *
      * @return Profile Retrieved profile
      */
     public function getByEmail(string $email): Profile

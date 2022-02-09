@@ -2,49 +2,34 @@
 
 namespace App\Entity;
 
+use App\Repository\WorkRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\WorkRepository")
- */
+#[ORM\Entity(repositoryClass: WorkRepository::class)]
 class Work
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $description;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $cover;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $link;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private $position;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Profile", inversedBy="works")
-     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
-     */
+    #[ORM\ManyToOne(targetEntity: Profile::class, inversedBy: 'works')]
+    #[ORM\JoinColumn(nullable: false)]
     private $profile;
 
     public function getId(): ?int
@@ -88,60 +73,36 @@ class Work
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLink()
+    public function getLink(): ?string
     {
         return $this->link;
     }
 
-    /**
-     * @param mixed $link
-     *
-     * @return self
-     */
-    public function setLink($link)
+    public function setLink(?string $link): self
     {
         $this->link = $link;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * @param mixed $position
-     *
-     * @return self
-     */
-    public function setPosition($position)
+    public function setPosition(int $position): self
     {
         $this->position = $position;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getProfile()
+    public function getProfile(): ?Profile
     {
         return $this->profile;
     }
 
-    /**
-     * @param mixed $profile
-     *
-     * @return self
-     */
-    public function setProfile($profile)
+    public function setProfile(?Profile $profile): self
     {
         $this->profile = $profile;
 

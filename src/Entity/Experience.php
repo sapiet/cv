@@ -2,55 +2,38 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Helper\DateHelper;
+use App\Repository\ExperienceRepository;
+use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ExperienceRepository")
- */
+#[ORM\Entity(repositoryClass: ExperienceRepository::class)]
 class Experience
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $company;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $jobName;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: 'date')]
     private $startDate;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
+    #[ORM\Column(type: 'date', nullable: true)]
     private $endDate;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $city;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $description;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Profile", inversedBy="experiences")
-     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
-     */
+    #[ORM\ManyToOne(targetEntity: Profile::class, inversedBy: 'experiences')]
+    #[ORM\JoinColumn(nullable: false)]
     private $profile;
 
     public function getId(): ?int
@@ -99,27 +82,19 @@ class Experience
         return $this->endDate;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate = null): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
-    /**
-     * @param mixed $city
-     *
-     * @return self
-     */
-    public function setCity($city)
+    public function setCity(string $city): self
     {
         $this->city = $city;
 
@@ -138,20 +113,12 @@ class Experience
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getProfile()
+    public function getProfile(): ?Profile
     {
         return $this->profile;
     }
 
-    /**
-     * @param mixed $profile
-     *
-     * @return self
-     */
-    public function setProfile($profile)
+    public function setProfile(?Profile $profile): self
     {
         $this->profile = $profile;
 

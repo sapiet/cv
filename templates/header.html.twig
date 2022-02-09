@@ -7,10 +7,7 @@
                 <li><a class="smoothscroll" href="#resume">Expériences</a></li>
                 <li><a class="smoothscroll" href="#portfolio">Portfolio</a></li>
                 <li><a class="smoothscroll" href="#testimonials">Recommandations</a></li>
-                {% if form is defined %}
-                    <li><a class="smoothscroll" href="#testimonials">Contact</a></li>
-                {% endif %}
-                <li><a class="smoothscroll" href="{{ path('cv') }}" target="_blank">Curriculum vitae</a></li>
+                <li><a href="{{ path('cv') }}" target="_blank">Curriculum vitae</a></li>
             </ul>
         </nav>
     </div>

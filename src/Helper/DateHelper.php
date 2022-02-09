@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Helper;
 
 use DateTimeInterface;
 
 class DateHelper
 {
-	public static function getDuration(DateTimeInterface $start, DateTimeInterface $end = null)
-	{
+    public static function getDuration(DateTimeInterface $start, DateTimeInterface $end = null)
+    {
         if (is_null($end)) {
             return sprintf('Depuis %s', $start->format('Y'));
         }
@@ -16,5 +17,5 @@ class DateHelper
         }
 
         return sprintf('%s - %s', $start->format('Y'), $end->format('Y'));
-	}
+    }
 }

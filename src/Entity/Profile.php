@@ -2,115 +2,78 @@
 
 namespace App\Entity;
 
+use App\Repository\ProfileRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ProfileRepository")
- */
+#[ORM\Entity(repositoryClass: ProfileRepository::class)]
 class Profile
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $firstname;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $lastname;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $email;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $address;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 10)]
     private $zipcode;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $city;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 10)]
     private $mobile;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $website;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $profession;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $shortDescription;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $longDescription;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Social", mappedBy="profile")
-     */
-    private $socials;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Experience", mappedBy="profile")
-     */
+    #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Experience::class)]
     private $experiences;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Formation", mappedBy="profile")
-     */
+    #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Formation::class)]
     private $formations;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Skill", mappedBy="profile")
-     */
+    #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Recommendation::class)]
+    private $recommendations;
+
+    #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Skill::class)]
     private $skills;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Work", mappedBy="profile")
-     */
-    private $works;
+    #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Social::class)]
+    private $socials;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Recommendation", mappedBy="profile")
-     */
-    private $recommendations;
+    #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Work::class)]
+    private $works;
 
     public function __construct()
     {
-        $this->socials = new ArrayCollection();
         $this->experiences = new ArrayCollection();
         $this->formations = new ArrayCollection();
-        $this->skills = new ArrayCollection();
-        $this->works = new ArrayCollection();
         $this->recommendations = new ArrayCollection();
+        $this->skills = new ArrayCollection();
+        $this->socials = new ArrayCollection();
+        $this->works = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -207,7 +170,7 @@ class Profile
         return $this->website;
     }
 
-    public function setWebsite(?string $website): self
+    public function setWebsite(string $website): self
     {
         $this->website = $website;
 
@@ -250,19 +213,182 @@ class Profile
         return $this;
     }
 
-    public function getSocials()
+    /**
+     * @return Collection|Experience[]
+     */
+    public function getExperiences(): Collection
+    {
+        return $this->experiences;
+    }
+
+    public function addExperience(Experience $experience): self
+    {
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences[] = $experience;
+            $experience->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experience $experience): self
+    {
+        if ($this->experiences->removeElement($experience)) {
+            // set the owning side to null (unless already changed)
+            if ($experience->getProfile() === $this) {
+                $experience->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Formation[]
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations[] = $formation;
+            $formation->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): self
+    {
+        if ($this->formations->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getProfile() === $this) {
+                $formation->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Recommendation[]
+     */
+    public function getRecommendations(): Collection
+    {
+        return $this->recommendations;
+    }
+
+    public function addRecommendation(Recommendation $recommendation): self
+    {
+        if (!$this->recommendations->contains($recommendation)) {
+            $this->recommendations[] = $recommendation;
+            $recommendation->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecommendation(Recommendation $recommendation): self
+    {
+        if ($this->recommendations->removeElement($recommendation)) {
+            // set the owning side to null (unless already changed)
+            if ($recommendation->getProfile() === $this) {
+                $recommendation->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills[] = $skill;
+            $skill->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        if ($this->skills->removeElement($skill)) {
+            // set the owning side to null (unless already changed)
+            if ($skill->getProfile() === $this) {
+                $skill->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Social[]
+     */
+    public function getSocials(): Collection
     {
         return $this->socials;
     }
 
-    public function addSocial(Social $social): ?string
+    public function addSocial(Social $social): self
     {
-        return $this->socials->add($social);
+        if (!$this->socials->contains($social)) {
+            $this->socials[] = $social;
+            $social->setProfile($this);
+        }
+
+        return $this;
     }
 
-    public function setSocials($socials): self
+    public function removeSocial(Social $social): self
     {
-        $this->socials = $socials;
+        if ($this->socials->removeElement($social)) {
+            // set the owning side to null (unless already changed)
+            if ($social->getProfile() === $this) {
+                $social->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Work[]
+     */
+    public function getWorks(): Collection
+    {
+        return $this->works;
+    }
+
+    public function addWork(Work $work): self
+    {
+        if (!$this->works->contains($work)) {
+            $this->works[] = $work;
+            $work->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWork(Work $work): self
+    {
+        if ($this->works->removeElement($work)) {
+            // set the owning side to null (unless already changed)
+            if ($work->getProfile() === $this) {
+                $work->setProfile(null);
+            }
+        }
 
         return $this;
     }
@@ -272,86 +398,6 @@ class Profile
     public function getFullname(): ?string
     {
         return $this->firstname.' '.$this->lastname;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getExperiences()
-    {
-        return $this->experiences;
-    }
-
-    /**
-     * @param mixed $experiences
-     *
-     * @return self
-     */
-    public function setExperiences($experiences)
-    {
-        $this->experiences = $experiences;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFormations()
-    {
-        return $this->formations;
-    }
-
-    /**
-     * @param mixed $formations
-     *
-     * @return self
-     */
-    public function setFormations($formations)
-    {
-        $this->formations = $formations;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSkills()
-    {
-        return $this->skills;
-    }
-
-    /**
-     * @param mixed $skills
-     *
-     * @return self
-     */
-    public function setSkills($skills)
-    {
-        $this->skills = $skills;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWorks()
-    {
-        return $this->works;
-    }
-
-    /**
-     * @param mixed $works
-     *
-     * @return self
-     */
-    public function setWorks($works)
-    {
-        $this->works = $works;
-
-        return $this;
     }
 
     /**
@@ -419,33 +465,10 @@ class Profile
     }
 
     /**
-     * @return Collection|Recommendation[]
+     * @return string
      */
-    public function getRecommendations(): Collection
+    public function getFormattedMobile(): string
     {
-        return $this->recommendations;
-    }
-
-    public function addRecommendation(Recommendation $recommendation): self
-    {
-        if (!$this->recommendations->contains($recommendation)) {
-            $this->recommendations[] = $recommendation;
-            $recommendation->setProfile($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRecommendation(Recommendation $recommendation): self
-    {
-        if ($this->recommendations->contains($recommendation)) {
-            $this->recommendations->removeElement($recommendation);
-            // set the owning side to null (unless already changed)
-            if ($recommendation->getProfile() === $this) {
-                $recommendation->setProfile(null);
-            }
-        }
-
-        return $this;
+        return implode('.', str_split($this->mobile, 2));
     }
 }

@@ -2,49 +2,34 @@
 
 namespace App\Entity;
 
+use App\Repository\SkillRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\SkillRepository")
- */
+#[ORM\Entity(repositoryClass: SkillRepository::class)]
 class Skill
 {
     const HARD = 'hard';
     const SOFT = 'soft';
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $percentage;
 
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=4, nullable=false)
-     */
+    #[ORM\Column(type: 'string', length: 4)]
     private $type;
 
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $category;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Profile", inversedBy="skills")
-     * @ORM\JoinColumn(name="profile_id", referencedColumnName="id")
-     */
+    #[ORM\ManyToOne(targetEntity: Profile::class, inversedBy: 'skills')]
+    #[ORM\JoinColumn(nullable: false)]
     private $profile;
 
     public function getId(): ?int
@@ -69,25 +54,18 @@ class Skill
         return $this->percentage;
     }
 
-    public function setPercentage(int $percentage): self
+    public function setPercentage(?int $percentage): self
     {
         $this->percentage = $percentage;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     * @return Skill
-     */
     public function setType(string $type): self
     {
         $this->type = $type;
@@ -95,18 +73,11 @@ class Skill
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCategory(): string
+    public function getCategory(): ?string
     {
         return $this->category;
     }
 
-    /**
-     * @param string $category
-     * @return Skill
-     */
     public function setCategory(string $category): self
     {
         $this->category = $category;
@@ -114,20 +85,12 @@ class Skill
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getProfile()
+    public function getProfile(): ?Profile
     {
         return $this->profile;
     }
 
-    /**
-     * @param mixed $profile
-     *
-     * @return self
-     */
-    public function setProfile($profile)
+    public function setProfile(?Profile $profile): self
     {
         $this->profile = $profile;
 

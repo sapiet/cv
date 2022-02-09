@@ -2,68 +2,39 @@
 
 namespace App\Entity;
 
+use App\Repository\RecommendationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\RecommendationRepository")
- */
+#[ORM\Entity(repositoryClass: RecommendationRepository::class)]
 class Recommendation
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Profile", inversedBy="recommendations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $profile;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'date')]
     private $date;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $firstname;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $company;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $picture;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $message;
+
+    #[ORM\ManyToOne(targetEntity: Profile::class, inversedBy: 'recommendations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $profile;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getProfile(): ?Profile
-    {
-        return $this->profile;
-    }
-
-    public function setProfile(?Profile $profile): self
-    {
-        $this->profile = $profile;
-
-        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
@@ -102,19 +73,12 @@ class Recommendation
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPicture(): ?string
     {
         return $this->picture;
     }
 
-    /**
-     * @param string|null $picture
-     * @return Recommendation
-     */
-    public function setPicture(?string $picture): self
+    public function setPicture(string $picture): self
     {
         $this->picture = $picture;
 
@@ -129,6 +93,18 @@ class Recommendation
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(?Profile $profile): self
+    {
+        $this->profile = $profile;
 
         return $this;
     }

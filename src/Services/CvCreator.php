@@ -50,7 +50,7 @@ class CvCreator
             $currentHeight = 297 * $pagesCount;
             $html2pdf = new Html2Pdf('P', [210, $currentHeight]);
             $html2pdf->writeHTML($view);
-        } while (1 < $html2pdf->getNbPages());
+        } while ($optimize && 1 < $html2pdf->getNbPages());
 
         if ($optimize) {
             do {
