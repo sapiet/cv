@@ -45,8 +45,9 @@ INSERT INTO `experience` (`id`, `profile_id`, `company`, `job_name`, `start_date
 (257,	44,	'Hautes Loges Animation',	'Développeur web',	'2012-01-01',	'2012-01-01',	'Marcq-en-baroeul',	'Création du site de l’association des Hautes Loges de Marcq-en-Barœul <a href=\"http://hautes-loges-animation.fr\" target=\"_blank\" title=\"Site web de l\'association Hautes Loges Animation\">« Hautes Loges Animation »</a> et son back-office.\r\nStack: HTML / PHP / CSS / Javascript / MySQL'),
 (259,	44,	'Wanted Solutions',	'Stage développeur web',	'2012-01-01',	'2012-01-01',	'Roubaix',	'Refonte du site statique en site dynamique\r\nMise en place de formulaires d\'inscription, création et modification de profil (niveau d\'étude, langues, compétences, années d\'expériences, etc)\r\nCréation d’un back-office pour la gestion des candidats, des offres et un algorithme de calcul de pertinence de matching candidats / offres.\r\nStack: HTML / PHP / CSS / Javascript / MySQL'),
 (260,	44,	'OpenClassrooms',	'Mentor',	'2021-05-06',	NULL,	'Marcq-en-Barœul',	'Accompagnement et suivi d\'étudiants dans leur <a href=\"https://openclassrooms.com/fr/paths/556-developpeur-web\" title=\"Formation développeur web Openclassrooms\" target=\"_blank\">formation de développeur web</a>\r\nStack: HTML5 / CSS3 / SASS / Javascript / Angular / VueJS / NodeJS / Mysql'),
-(261,	44,	'Self',	'Développeur web',	'2019-02-13',	NULL,	'Marcq-en-barœul',	'Le document que vous êtes en train de lire est généré automatiquement à partir d\'une source d\'information centralisée\r\nDéveloppement d\'un builder de curriculum vitae statique permettant un rendu <a href=\"https://xavierquievre.fr\" title=\"CV en ligne\" target=\"_blank\">web</a> et <a href=\"https://xavierquievre.fr/curriculum-vitae.pdf\" title=\"CV en pdf\" target=\"_blank\">pdf</a>\r\nStack: Docker / PHP8 / PHP7 / Symfony 6 / Symfony 4 / Webpack / HTML5 / CSS3 / SCSS / HTML2PDF / Gulp / MySQL'),
-(262,	44,	'Jérôme JDMP',	'Développeur web',	'2022-08-21',	NULL,	'Marcq-en-Baroeul',	'Création d\'un <a href=\"https://manga-horizon.fr\" target=\"_blank\">site permettant de trouver un manga</a> après avoir répondu à quelques questions\r\nCréation du backoffice de gestion des mangas et leur tags et du flow de question');
+(261,	44,	'Curriculum vitae',	'Développeur web',	'2019-02-13',	NULL,	'Marcq-en-barœul',	'Le document que vous êtes en train de lire est généré automatiquement à partir d\'une source d\'information centralisée\r\nDéveloppement d\'un builder de curriculum vitae statique permettant un rendu <a href=\"https://xavierquievre.fr\" title=\"CV en ligne\" target=\"_blank\">web</a> et <a href=\"https://xavierquievre.fr/curriculum-vitae.pdf\" title=\"CV en pdf\" target=\"_blank\">pdf</a>\r\nStack: Docker / PHP8 / PHP7 / Symfony 6 / Symfony 4 / Webpack / HTML5 / CSS3 / SCSS / HTML2PDF / Gulp / MySQL'),
+(262,	44,	'Jérôme JDMP',	'Développeur web',	'2022-08-21',	NULL,	'Marcq-en-Baroeul',	'Création d\'un <a href=\"https://manga-horizon.fr\" target=\"_blank\">site permettant de trouver un manga</a> après avoir répondu à quelques questions\r\nCréation du backoffice de gestion des mangas et leur tags et du flow de question'),
+(263,	44,	'Freelance',	'Développeur web',	'2021-05-06',	NULL,	'Marcq-en-Barœul',	'Travail sur des missions pour des clients en tant que freelance');
 
 DROP TABLE IF EXISTS `formation`;
 CREATE TABLE `formation` (
@@ -73,7 +74,8 @@ INSERT INTO `formation` (`id`, `profile_id`, `place`, `degree`, `start_date`, `e
 (109,	44,	'OpenClassrooms',	'Certification \"Développez des applications Web avec Angular\"',	'2019-10-21',	'2019-10-21',	'Marcq-en-Barœul',	'',	'cert-oc-angular.pdf'),
 (110,	44,	'OpenClassrooms',	'Certification \"Passez au Full stack avec Node.js, Express et MongoDB\"',	'2021-05-20',	'2021-05-20',	'Marcq-en-Barœul',	'',	'cert-fullstack-node-express-mongo.pdf'),
 (111,	44,	'OpenClassrooms',	'Certification \"Apprenez à programmer en Python\"',	'2020-02-14',	'2020-02-14',	'Marcq-en-Barœul',	'',	'cert-oc-python.pdf'),
-(112,	44,	'Openclassrooms',	'Certification \"Optimisez votre déploiement en créant des conteneurs avec Docker\"',	'2022-02-06',	'2022-02-07',	'Marcq-en-Barœul',	'',	'cert-docker.pdf');
+(112,	44,	'Openclassrooms',	'Certification \"Optimisez votre déploiement en créant des conteneurs avec Docker\"',	'2022-02-06',	'2022-02-07',	'Marcq-en-Barœul',	'',	'cert-docker.pdf'),
+(113,	44,	'OpenClassrooms',	'Certification \"Testez vos applications Front End avec JavaScript\"',	'2022-11-26',	'2022-11-26',	'Marcq-en-Barœul',	'',	'cert-javascript-testing.pdf');
 
 DROP TABLE IF EXISTS `profile`;
 CREATE TABLE `profile` (
@@ -110,8 +112,9 @@ CREATE TABLE `recommendation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `recommendation` (`id`, `profile_id`, `date`, `firstname`, `company`, `picture`, `message`) VALUES
-(1,	44,	'2022-01-17',	'Sandra Vanhove',	'Ci-Oniya',	'https://image-uviadeo.journaldunet.com/image/450/1640230413/389833.jpg',	'Xavier QUIEVRE est un développer très à l\'écoute qui s’est investi avec un grand professionnalisme dans l’ensemble de ses missions qui lui ont été confié. Il est sérieux, minutieux, force de proposition, diplomate et pédagogue. Je vous recommande vivement ce profil et je referai appel à Xavier sans aucune hésitation pour nos projets à venir chez Ci-Oniya.'),
-(2,	44,	'2022-01-18',	'Bernard Pagoaga',	'Jooxter',	'https://avatars.githubusercontent.com/u/10684574?v=4',	'Xavier est un développeur expérimenté, sérieux et très efficace ! Il est par ailleurs très agréable de travailler avec lui, je recommande ;)');
+(1,	44,	'2022-01-17',	'Sandra',	'Ci-Oniya',	'ci-oniya.jpg',	'Xavier QUIEVRE est un développer très à l\'écoute qui s’est investi avec un grand professionnalisme dans l’ensemble de ses missions qui lui ont été confié. Il est sérieux, minutieux, force de proposition, diplomate et pédagogue. Je vous recommande vivement ce profil et je referai appel à Xavier sans aucune hésitation pour nos projets à venir chez Ci-Oniya.'),
+(2,	44,	'2022-01-18',	'Bernard',	'Jooxter',	'jooxter.jpeg',	'Xavier est un développeur expérimenté, sérieux et très efficace ! Il est par ailleurs très agréable de travailler avec lui, je recommande ;)'),
+(3,	44,	'2022-03-11',	'Arnaud',	'ChefsTouch',	'chefstouch.jpeg',	'Excellente collaboration avec Xavier. Pédagogue, à l\'écoute, réactif et simplicité sont ses qualités premières. Il a pointer du doigts les problématiques sans difficultés et à su les résoudre rapidement. Merci pour ta collaboration. Je recommande vivement.');
 
 DROP TABLE IF EXISTS `skill`;
 CREATE TABLE `skill` (
@@ -207,4 +210,4 @@ INSERT INTO `work` (`id`, `profile_id`, `title`, `description`, `cover`, `link`,
 (544,	44,	'Trouve le manga qui te correspond !',	'Application permettant de trouver un manga à lire après avoir répondu à quelques questions',	'mangahorizon.png',	'https://manga-horizon.fr',	2),
 (545,	44,	'Sapiet v2',	'Refonte d\'un site concernant la musique',	'sapiet-v2.png',	'http://sapiet.free.fr',	1);
 
--- 2022-10-26 21:04:05
+-- 2022-11-26 13:35:05
