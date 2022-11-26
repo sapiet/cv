@@ -1,7 +1,7 @@
 #!/bin/sh
 
 bin/console cache:clear -e prod && \
-# npm run build
+npm run build
 
 rm -rf build && mkdir build && \
 

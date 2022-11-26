@@ -51,3 +51,7 @@ a:hover, a:focus, a:active {
 .s-header__menu-toggle {
     background-color: black;
 }
+
+.testimonial-slider__avatar {
+    object-fit: cover;
+}

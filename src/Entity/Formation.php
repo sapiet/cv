@@ -153,6 +153,6 @@ class Formation
             return null;
         }
 
-        return sprintf('f/%s', $this->document);
+        return sprintf('f/f/%s', $this->document);
     }
 }

@@ -15,8 +15,8 @@
                         <div class="testimonial-slider__slide swiper-slide">
                             <div class="testimonial-slider__author">
                                 <img
-                                        src="{{ recommendation.picture }}"
-                                        alt="Author image"
+                                        src="{{ asset('f/r/' ~ recommendation.picture) }}"
+                                        alt="{{ recommendation.firstname }} picture"
                                         class="testimonial-slider__avatar"
                                 >
                                 <cite class="testimonial-slider__cite">
