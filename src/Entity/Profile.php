@@ -471,4 +471,15 @@ class Profile
     {
         return implode('.', str_split($this->mobile, 2));
     }
+
+    public function getOrderedRecommendations(): array
+    {
+        $recommendations = $this->recommendations->getValues();
+
+        usort($recommendations, function (Recommendation $a, Recommendation $b): int {
+            return $b->getDate()->getTimestamp() - $a->getDate()->getTimestamp();
+        });
+
+        return $recommendations;
+    }
 }

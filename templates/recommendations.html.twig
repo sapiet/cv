@@ -11,11 +11,16 @@
         <div class="column">
             <div class="swiper-container testimonial-slider">
                 <div class="swiper-wrapper">
-                    {% for recommendation in profile.recommendations() %}
+                    {% for recommendation in profile.orderedRecommendations %}
                         <div class="testimonial-slider__slide swiper-slide">
                             <div class="testimonial-slider__author">
+                                {% if recommendation.picture starts with 'http' %}
+                                    {% set url = recommendation.picture %}
+                                {% else %}
+                                    {% set url = asset('f/r/' ~ recommendation.picture) %}
+                                {% endif %}
                                 <img
-                                        src="{{ asset('f/r/' ~ recommendation.picture) }}"
+                                        src="{{ url }}"
                                         alt="{{ recommendation.firstname }} picture"
                                         class="testimonial-slider__avatar"
                                 >

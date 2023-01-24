@@ -243,7 +243,7 @@ table {
 	<table class="structure">
 		<tr>
 			<td class="structure-inner">
-				{% for recommendation in profile.recommendations() %}
+				{% for recommendation in profile.orderedRecommendations() %}
 					<table>
 						<tr>
 							<td style="width:100%;{% if not loop.last %} padding-bottom: 10mm{% endif %}">
