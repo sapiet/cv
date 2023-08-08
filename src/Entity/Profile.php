@@ -482,4 +482,19 @@ class Profile
 
         return $recommendations;
     }
+
+    public function getGroupedFormations(): array
+    {
+        $grouped = [];
+
+        foreach ($this->getFormations() as $formation) {
+            if (false === array_key_exists($formation->getPlace(), $grouped)) {
+                $grouped[$formation->getPlace()] = [];
+            }
+
+            $grouped[$formation->getPlace()][] = $formation;
+        }
+
+        return $grouped;
+    }
 }

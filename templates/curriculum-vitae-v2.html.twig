@@ -196,41 +196,46 @@ table {
 	<table class="structure">
 		<tr>
 			<td class="structure-inner">
-				{% for formation in profile.getFormations() %}
+				{% for place, formations in profile.getGroupedFormations() %}
 					<table>
-						<tr>
-							<td class="sub-left text-darker">
-								{{ formation.getPlace() }}
-								<br>
-								<span class="text-dark">
-									{% if formation.document %}
-										{% set href = asset(formation.documentPath) %}
-
-										{% if app.environment is same as('prod') %}
-											{% set href = absolute_url(href) %}
-										{% endif %}
-										<a
-												href="{{ href }}"
-												target="_blank"
-												title="{{ formation.getDegree() }}"
-										>
-											{{ formation.getDegree() }}
-										</a>
-									{% else %}
-										{{ formation.getDegree() }}
+						{% for formation in formations %}
+							<tr>
+								<td class="sub-left text-darker">
+									{% if loop.first %}
+										<span class="text-darker">
+											{{ formation.getPlace() }}
+											<br>
+											<br>
+										</span>
 									{% endif %}
-				    			</span>
-								{% if formation.getDescription() %}
-									<br>
-									<span class="description">
-								        {{ formation.getDescription() }}
-							        </span>
-								{% endif %}
-							</td>
-							<td class="sub-right text-dark">
-								{{ formation.getDuration() }}
-							</td>
-						</tr>
+									<span class="text-dark">
+										{% if formation.document %}
+											{% set href = asset(formation.documentPath) %}
+											{% set href = absolute_url(href) %}
+
+											<a
+													href="{{ href }}"
+													target="_blank"
+													title="{{ formation.getDegree() }}"
+											>
+												{{ formation.getDegree() }}
+											</a>
+										{% else %}
+											{{ formation.getDegree() }}
+										{% endif %}
+									</span>
+									{% if formation.getDescription() %}
+										<br>
+										<span class="description">
+											{{ formation.getDescription() }}
+										</span>
+									{% endif %}
+								</td>
+								<td class="sub-right text-dark" style="vertical-align: bottom;">
+									{{ formation.getDuration() }}
+								</td>
+							</tr>
+						{% endfor %}
 					</table>
 				{% endfor %}
 			</td>

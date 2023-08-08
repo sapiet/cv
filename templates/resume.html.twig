@@ -68,33 +68,37 @@
             <h3 class="section-header-allcaps">Formations</h3>
         </div>
         <div class="column large-9 tab-12">
-            {% for formation in profile.getFormations() %}
+            {% for place, formations in profile.getGroupedFormations() %}
                 <div class="resume-block">
                     <div class="resume-block__header">
-                        <h4 class="h3">{{ formation.getPlace() }}</h4>
-                        <p class="resume-block__header-meta">
-                            {% if formation.document %}
-                                <a
-                                        href="{{ asset(formation.documentPath) }}"
-                                        target="_blank"
-                                        title="{{ formation.getDegree() }}"
-                                >
-                                    {{ formation.getDegree() }}
-                                </a>
-                            {% else %}
-                                <span>{{ formation.getDegree() }}</span>
-                            {% endif %}
-                            <span class="resume-block__header-date">
-                                {{ formation.getDuration() }}
-                            </span>
-                        </p>
-                    </div>
+                        <h4 class="h3">
+                            {{ place }}
+                        </h4>
+                        {% for formation in formations %}
+                            <p class="resume-block__header-meta">
+                                {% if formation.document %}
+                                    <a
+                                            href="{{ asset(formation.documentPath) }}"
+                                            target="_blank"
+                                            title="{{ formation.getDegree() }}"
+                                    >
+                                        {{ formation.getDegree() }}
+                                    </a>
+                                {% else %}
+                                    <span>{{ formation.getDegree() }}</span>
+                                {% endif %}
+                                <span class="resume-block__header-date">
+                                    {{ formation.getDuration() }}
+                                </span>
+                            </p>
 
-                    {% if formation.getDescription() %}
-                        <p>
-                            {{ formation.getDescription() }}
-                        </p>
-                    {% endif %}
+                            {% if formation.getDescription() %}
+                                <p>
+                                    {{ formation.getDescription() }}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             {% endfor %}
         </div>
