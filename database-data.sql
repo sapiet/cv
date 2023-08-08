@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.13, for macos10.14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for macos13 (arm64)
 --
 -- Host: localhost    Database: cv
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8mb4 ;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,13 +21,13 @@
 
 DROP TABLE IF EXISTS `doctrine_migration_versions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `doctrine_migration_versions` (
-  `version` varchar(191) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
-  `execution_time` int(11) DEFAULT NULL,
+  `execution_time` int DEFAULT NULL,
   PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,10 +46,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `experience`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `experience` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `profile_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `profile_id` int NOT NULL,
   `company` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `job_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_date` date NOT NULL,
@@ -78,10 +78,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `formation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `formation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `profile_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `profile_id` int NOT NULL,
   `place` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `degree` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_date` date NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE `formation` (
   PRIMARY KEY (`id`),
   KEY `IDX_404021BFCCFA12B8` (`profile_id`),
   CONSTRAINT `FK_404021BFCCFA12B8` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `formation` (
 
 LOCK TABLES `formation` WRITE;
 /*!40000 ALTER TABLE `formation` DISABLE KEYS */;
-INSERT INTO `formation` VALUES (103,44,'Lycée Yves Kernanec','Baccalauréat général scientifique option musique','2009-01-01','2009-01-01','Marcq-en-baroeul','',NULL),(104,44,'C.M.A. (Centre des Musiques Actuelles)','Formation de Musique Assistée par Ordinateur','2010-01-01','2010-01-01','Valenciennes','',NULL),(105,44,'Afpa','Formation de développeur logiciel','2012-01-01','2012-01-01','Roubaix','','diplome-developpeur.pdf'),(107,44,'OpenClassrooms','Certification \"Devenez mentor sur OpenClassrooms\"','2020-01-24','2020-01-24','Marcq-en-Barœul','','cert-oc-mentor.pdf'),(108,44,'OpenClassrooms','Certification \"Développez une application mobile multiplateforme avec Ionic 3\"','2020-02-06','2020-02-06','Marcq-en-Barœul','','cert-oc-ionic3.pdf'),(109,44,'OpenClassrooms','Certification \"Développez des applications Web avec Angular\"','2019-10-21','2019-10-21','Marcq-en-Barœul','','cert-oc-angular.pdf'),(110,44,'OpenClassrooms','Certification \"Passez au Full stack avec Node.js, Express et MongoDB\"','2021-05-20','2021-05-20','Marcq-en-Barœul','','cert-fullstack-node-express-mongo.pdf'),(111,44,'OpenClassrooms','Certification \"Apprenez à programmer en Python\"','2020-02-14','2020-02-14','Marcq-en-Barœul','','cert-oc-python.pdf'),(112,44,'Openclassrooms','Certification \"Optimisez votre déploiement en créant des conteneurs avec Docker\"','2022-02-06','2022-02-07','Marcq-en-Barœul','','cert-docker.pdf'),(113,44,'OpenClassrooms','Certification \"Testez vos applications Front End avec JavaScript\"','2022-11-26','2022-11-26','Marcq-en-Barœul','','cert-javascript-testing.pdf');
+INSERT INTO `formation` VALUES (103,44,'Lycée Yves Kernanec','Baccalauréat général scientifique option musique','2009-01-01','2009-01-01','Marcq-en-baroeul','',NULL),(104,44,'C.M.A. (Centre des Musiques Actuelles)','Formation de Musique Assistée par Ordinateur','2010-01-01','2010-01-01','Valenciennes','',NULL),(105,44,'Afpa','Formation de développeur logiciel','2012-01-01','2012-01-01','Roubaix','','diplome-developpeur.pdf'),(107,44,'OpenClassrooms','Certification \"Devenez mentor sur OpenClassrooms\"','2020-01-24','2020-01-24','Marcq-en-Barœul','','cert-oc-mentor.pdf'),(108,44,'OpenClassrooms','Certification \"Développez une application mobile multiplateforme avec Ionic 3\"','2020-02-06','2020-02-06','Marcq-en-Barœul','','cert-oc-ionic3.pdf'),(109,44,'OpenClassrooms','Certification \"Développez des applications Web avec Angular\"','2019-10-21','2019-10-21','Marcq-en-Barœul','','cert-oc-angular.pdf'),(110,44,'OpenClassrooms','Certification \"Passez au Full stack avec Node.js, Express et MongoDB\"','2021-05-20','2021-05-20','Marcq-en-Barœul','','cert-fullstack-node-express-mongo.pdf'),(111,44,'OpenClassrooms','Certification \"Apprenez à programmer en Python\"','2020-02-14','2020-02-14','Marcq-en-Barœul','','cert-oc-python.pdf'),(112,44,'Openclassrooms','Certification \"Optimisez votre déploiement en créant des conteneurs avec Docker\"','2022-02-06','2022-02-07','Marcq-en-Barœul','','cert-docker.pdf'),(113,44,'OpenClassrooms','Certification \"Testez vos applications Front End avec JavaScript\"','2022-11-26','2022-11-26','Marcq-en-Barœul','','cert-javascript-testing.pdf'),(114,44,'OpenClassrooms','Certification \"Apprenez à programmer en Java\"','2023-08-10','2023-08-10','Montvicq','','cert-java.pdf');
 /*!40000 ALTER TABLE `formation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,9 +111,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `migration_versions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migration_versions` (
-  `version` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version` varchar(14) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `executed_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -135,9 +135,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `profile` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -169,10 +169,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `recommendation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `recommendation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `profile_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `profile_id` int NOT NULL,
   `date` date NOT NULL,
   `firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `company` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -200,18 +200,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `skill`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `skill` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `profile_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `profile_id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `percentage` int(11) DEFAULT NULL,
+  `percentage` int DEFAULT NULL,
   `type` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_5E3DE477CCFA12B8` (`profile_id`),
   CONSTRAINT `FK_5E3DE477CCFA12B8` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=365 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=366 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +220,7 @@ CREATE TABLE `skill` (
 
 LOCK TABLES `skill` WRITE;
 /*!40000 ALTER TABLE `skill` DISABLE KEYS */;
-INSERT INTO `skill` VALUES (340,44,'PHP5/7/8',75,'hard','backend'),(341,44,'Symfony 1/2/3/4/5/6',70,'hard','backend'),(342,44,'HTML5 / CSS3 / SCSS',70,'hard','frontend'),(343,44,'jQuery',65,'hard','frontend'),(344,44,'NodeJS',50,'hard','backend'),(345,44,'Angular 2+ / Ionic',60,'hard','frontend'),(346,44,'VueJS',60,'hard','frontend'),(347,44,'MySQL',70,'hard','database'),(348,44,'Docker',30,'hard','sys'),(349,44,'MongoDB',50,'hard','database'),(350,44,'ElasticSearch',50,'hard','database'),(351,44,'React',30,'hard','frontend'),(352,44,'Javascript',70,'hard','frontend'),(353,44,'ExpressJS',50,'hard','backend'),(355,44,'GIT',65,'hard','versioning'),(356,44,'Autonomie',0,'soft',''),(357,44,'Patience',0,'soft',''),(358,44,'Diplomatie',0,'soft',''),(359,44,'Dynamisme',0,'soft',''),(360,44,'Sérieux',0,'soft',''),(361,44,'Force de proposition',0,'soft',''),(362,44,'Attention',0,'soft',''),(363,44,'Rigueur',0,'soft',''),(364,44,'Pédagogie',0,'soft','');
+INSERT INTO `skill` VALUES (340,44,'PHP5/7/8',75,'hard','backend'),(341,44,'Symfony 1/2/3/4/5/6',70,'hard','backend'),(342,44,'HTML5 / CSS3 / SCSS',70,'hard','frontend'),(343,44,'jQuery',65,'hard','frontend'),(344,44,'NodeJS',50,'hard','backend'),(345,44,'Angular 2+ / Ionic',60,'hard','frontend'),(346,44,'VueJS',60,'hard','frontend'),(347,44,'MySQL',70,'hard','database'),(348,44,'Docker',30,'hard','sys'),(349,44,'MongoDB',50,'hard','database'),(350,44,'ElasticSearch',50,'hard','database'),(351,44,'React',30,'hard','frontend'),(352,44,'Javascript',70,'hard','frontend'),(353,44,'ExpressJS',50,'hard','backend'),(355,44,'GIT',65,'hard','versioning'),(356,44,'Autonomie',0,'soft',''),(357,44,'Patience',0,'soft',''),(358,44,'Diplomatie',0,'soft',''),(359,44,'Dynamisme',0,'soft',''),(360,44,'Sérieux',0,'soft',''),(361,44,'Force de proposition',0,'soft',''),(362,44,'Attention',0,'soft',''),(363,44,'Rigueur',0,'soft',''),(364,44,'Pédagogie',0,'soft',''),(365,44,'JAVA',40,'hard','backend');
 /*!40000 ALTER TABLE `skill` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,10 +230,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `social`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `social` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `profile_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `profile_id` int NOT NULL,
   `class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -259,15 +259,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `work`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `work` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `profile_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `profile_id` int NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `cover` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `position` int(11) NOT NULL,
+  `position` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_534E6880CCFA12B8` (`profile_id`),
   CONSTRAINT `FK_534E6880CCFA12B8` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`id`)
@@ -293,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-03 14:42:24
+-- Dump completed on 2023-08-08 20:59:23
